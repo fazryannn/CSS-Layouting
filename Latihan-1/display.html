@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display CSS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Display CSS</h1>
+    <p>
+        <code>display</code> menentukan bagaimana sebuah elemen ditampilkan dan berperilaku
+        dalam tata letak (layout). Ini adalah dasar dari semua layouting di CSS.
+    </p>
+
+    <!-- 1. BLOCK -->
+    <section>
+        <h2>display: block</h2>
+        <p>
+            Elemen mengambil seluruh lebar yang tersedia dan selalu diawali di baris baru.
+            Lebar dan tinggi bisa diatur. Contoh bawaan: <code>div</code>, <code>p</code>,
+            <code>h1</code>, <code>section</code>.
+        </p>
+        <div class="blok">Elemen block</div>
+    </section>
+
+    <!-- 2. INLINE -->
+    <section>
+        <h2>display: inline</h2>
+        <p>
+            Elemen mengalir sejajar dengan teks, hanya selebar kontennya.
+            <code>width</code>, <code>height</code>, dan margin vertikal tidak berpengaruh.
+            Contoh bawaan: <code>span</code>, <code>a</code>, <code>strong</code>.
+        </p>
+        <ul class="link">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+        </ul>
+    </section>
+
+    <!-- 3. INLINE-BLOCK -->
+    <section>
+        <h2>display: inline-block</h2>
+        <p>
+            Gabungan keduanya: sejajar seperti inline, tetapi bisa diatur
+            <code>width</code>/<code>height</code> seperti block.
+        </p>
+        <div class="inline">Kotak 1</div>
+        <div class="inline">Kotak 2</div>
+        <div class="inline">Kotak 3</div>
+    </section>
+
+    <!-- 4. NONE -->
+    <section>
+        <h2>display: none</h2>
+        <p>
+            Elemen hilang total dari halaman dan tidak memakan ruang. Berbeda dengan
+            <code>visibility: hidden</code> yang hanya menyembunyikan, tetapi ruangnya tetap ada.
+        </p>
+        <p>Paragraf ini tampil.</p>
+        <p class="none">Paragraf ini disembunyikan dengan display: none.</p>
+        <p>Paragraf ini langsung menempel di atas karena yang tersembunyi tidak memakan ruang.</p>
+    </section>
+
+    <!-- 5. FLEX -->
+    <section>
+        <h2>display: flex</h2>
+        <p>
+            Layout satu dimensi (baris atau kolom). Cocok untuk navbar, menengahkan elemen,
+            dan distribusi ruang.
+        </p>
+        <nav>
+            <ul class="navbar">
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+                <li><a href="#">Link 4</a></li>
+                <li><a href="#">Link 5</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- 6. GRID -->
+    <section>
+        <h2>display: grid</h2>
+        <p>
+            Layout dua dimensi (baris dan kolom sekaligus). Cocok untuk tata letak halaman
+            dan galeri.
+        </p>
+        <div class="galeri">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+        </div>
+    </section>
+</body>
+</html>

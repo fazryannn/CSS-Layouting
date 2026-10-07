@@ -1,0 +1,53 @@
+/* 1. BLOCK */
+.blok {
+    display: block;
+    width: 200px;
+    background: lightblue;
+}
+
+/* 2. INLINE */
+.link li {
+    display: inline;
+    background: yellow;
+}
+
+/* 3. INLINE-BLOCK */
+.inline {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    background: coral;
+}
+
+/* 4. NONE */
+.none {
+    display: none;
+}
+
+/* 5. FLEX */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* sumbu utama */
+    align-items: center;            /* sumbu silang */
+    gap: 16px;
+    list-style: none;
+    padding: 10px 20px;
+    background: #333;
+}
+
+.navbar a {
+    color: white;
+}
+
+/* 6. GRID */
+.galeri {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom sama lebar */
+    gap: 10px;
+}
+
+.galeri div {
+    background: lightblue;
+    padding: 20px;
+    text-align: center;
+}
