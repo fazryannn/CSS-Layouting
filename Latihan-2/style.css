@@ -1,0 +1,310 @@
+/* ==========================================================
+   DIMENSI & OVERFLOW - CSS dasar
+   Bagian 1: pengaturan umum halaman
+   Bagian 2: komponen tampilan (judul, kartu materi, tabel, kode)
+   Bagian 3: contoh demo untuk tiap materi
+   ========================================================== */
+
+
+/* ---------- BAGIAN 1: PENGATURAN UMUM ---------- */
+
+/* box-sizing: border-box -> width sudah termasuk padding dan border.
+   Ditulis di paling atas supaya berlaku untuk semua elemen (*). */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8eef3;
+    color: #2b2f33;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+/* max-width + margin auto -> konten di tengah, menyusut di layar kecil */
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #1e3a5f;
+}
+
+
+/* ---------- BAGIAN 2: KOMPONEN TAMPILAN ---------- */
+
+.judul {
+    background-color: #1e3a5f;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-bottom: 6px solid #0f766e;
+}
+
+.judul h1 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.judul p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* kartu putih untuk tiap materi */
+.materi {
+    background-color: #ffffff;
+    border-left: 6px solid #0f766e;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.materi h2 {
+    margin-top: 0;
+}
+
+.materi h3 {
+    color: #0f766e;
+}
+
+/* kode di dalam teks */
+code {
+    background-color: #eef4f6;
+    color: #b45309;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+/* blok kode: overflow-x auto -> baris panjang bisa digeser */
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+/* code di dalam pre tidak perlu warna latar sendiri */
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+/* kotak catatan kuning */
+.catatan {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+}
+
+/* pembungkus tabel: bisa digeser ke samping di layar kecil */
+.tabel-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+}
+
+/* nth-child: baris genap diberi warna selang-seling */
+tbody tr:nth-child(even) {
+    background-color: #eef4f6;
+}
+
+
+/* ---------- BAGIAN 3: CONTOH DEMO ---------- */
+
+/* .baris membungkus beberapa demo yang berjajar */
+.baris {
+    margin-bottom: 10px;
+}
+
+/* khusus demo overflow: beri ruang di bawah supaya
+   teks yang tumpah (visible) tidak menimpa konten berikutnya */
+.baris-overflow {
+    padding-bottom: 90px;
+}
+
+/* inline-block -> demo berjajar ke samping tapi tetap bisa diatur ukurannya.
+   vertical-align top -> semua demo rata di atas.
+   Catatan: ada celah kecil antar demo karena spasi di HTML dihitung sebagai teks. */
+.demo {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 14px 14px 0;
+}
+
+/* tulisan kecil di atas tiap contoh */
+.label {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+
+/* --- Demo 1: width & height --- */
+
+/* contoh awal: Hello World */
+.hitam {
+    width: 200px;
+    height: 100px;
+    padding: 8px;
+    background-color: black;
+    color: azure;
+}
+
+/* parent 200px, anaknya 50% -> jadi 100px */
+.induk-kecil {
+    width: 200px;
+    border: 2px dashed #94a3b8;
+}
+
+.setengah {
+    width: 50%;
+    padding: 8px;
+    background-color: #0f766e;
+    color: #ffffff;
+}
+
+/* span (inline): width dan height DIABAIKAN */
+.s-inline {
+    width: 120px;
+    height: 40px;
+    background-color: #99f6e4;
+}
+
+/* inline-block: width dan height BERLAKU */
+.s-block {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    background-color: #fdba74;
+}
+
+
+/* --- Demo 2: min & max --- */
+
+/* lebar 100% parent, tapi tidak boleh lebih dari 300px */
+.maks {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    background-color: #0f766e;
+    color: #ffffff;
+}
+
+/* tinggi minimal 100px, bertambah kalau isinya banyak */
+.min-tinggi {
+    width: 200px;
+    min-height: 100px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #ccfbf1;
+    border: 2px solid #0f766e;
+}
+
+
+/* --- Demo 3: box-sizing --- */
+
+/* ukuran dan hiasan sama, hanya box-sizing yang beda */
+.cb, .bb {
+    width: 200px;
+    padding: 20px;
+    border: 5px solid #1e3a5f;
+    background-color: #dbeafe;
+    font-size: 14px;
+}
+
+.cb {
+    box-sizing: content-box;   /* total 200 + 40 + 10 = 250px */
+}
+
+.bb {
+    box-sizing: border-box;    /* total tetap 200px */
+}
+
+
+/* --- Demo 4: overflow --- */
+
+/* kotak ukuran tetap, isinya sengaja lebih panjang dari kotak */
+.kotak {
+    width: 200px;
+    height: 100px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #fef3c7;
+    border: 2px solid #f59e0b;
+}
+
+.o-visible { overflow: visible; }  /* default: tumpah keluar */
+.o-hidden  { overflow: hidden; }   /* dipotong */
+.o-scroll  { overflow: scroll; }   /* scrollbar selalu tampil */
+.o-auto    { overflow: auto; }     /* scrollbar hanya kalau perlu */
+
+
+/* --- Demo 5: overflow-x dan overflow-y --- */
+
+/* white-space: nowrap -> teks tidak turun baris, jadi melebar ke samping */
+.ox {
+    width: 250px;
+    height: 70px;
+    padding: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow-x: auto;      /* geser kiri-kanan */
+    overflow-y: hidden;    /* atas-bawah dipotong */
+    background-color: #e0e7ff;
+    border: 2px solid #4f46e5;
+}
+
+.oy {
+    width: 250px;
+    height: 100px;
+    padding: 8px;
+    font-size: 14px;
+    overflow-y: auto;      /* scroll atas-bawah */
+    overflow-x: hidden;    /* kiri-kanan dipotong */
+    background-color: #e0e7ff;
+    border: 2px solid #4f46e5;
+}
+
+
+/* --- Demo 6: text-overflow --- */
+
+/* dua kotak memakai dua property yang sama:
+   nowrap (satu baris) + hidden (potong yang berlebih) */
+.elipsis, .potong {
+    width: 250px;
+    padding: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #fce7f3;
+    border: 2px solid #db2777;
+}
+
+/* hanya .elipsis yang diberi titik tiga */
+.elipsis {
+    text-overflow: ellipsis;
+}

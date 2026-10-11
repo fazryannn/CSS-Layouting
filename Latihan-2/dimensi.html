@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensi-Overflow CSS Layouting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>Dimensi &amp; Overflow</h1>
+        <p>Catatan belajar CSS layouting: ukuran kotak dan apa yang terjadi kalau isinya kelebihan.</p>
+    </header>
+
+
+    <!-- ===== 1. WIDTH & HEIGHT ===== -->
+    <section class="materi">
+        <h2>1. Width &amp; Height</h2>
+        <p>
+            <code>width</code> mengatur lebar dan <code>height</code> mengatur tinggi.
+            Keduanya hanya berlaku di elemen <b>block</b> dan <b>inline-block</b>.
+            Elemen <b>inline</b> (misalnya <code>span</code>) mengabaikannya.
+        </p>
+
+        <!-- tabel dibungkus agar bisa digeser di layar kecil (materi overflow-x) -->
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Satuan</th><th>Artinya</th><th>Contoh</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>px</code></td><td>Piksel, ukuran tetap</td><td><code>width: 300px</code></td></tr>
+                    <tr><td><code>%</code></td><td>Persen dari ukuran parent</td><td><code>width: 50%</code></td></tr>
+                    <tr><td><code>vw / vh</code></td><td>Persen dari lebar / tinggi layar</td><td><code>height: 100vh</code></td></tr>
+                    <tr><td><code>em / rem</code></td><td>Relatif terhadap ukuran font</td><td><code>width: 20rem</code></td></tr>
+                    <tr><td><code>auto</code></td><td>Ditentukan otomatis (default)</td><td><code>width: auto</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Contoh</h3>
+        <div class="baris">
+            <!-- kotak hitam: contoh awal "Hello World" -->
+            <div class="demo">
+                <span class="label">width 200px, height 100px</span>
+                <div class="hitam">Hello World</div>
+            </div>
+
+            <!-- persen mengikuti parent: parent 200px, anak 50% = 100px -->
+            <div class="demo">
+                <span class="label">width: 50% dari parent</span>
+                <div class="induk-kecil">
+                    <div class="setengah">50%</div>
+                </div>
+            </div>
+
+            <!-- span inline mengabaikan width/height, inline-block tidak -->
+            <div class="demo">
+                <span class="label">inline vs inline-block</span>
+                <span class="s-inline">inline</span>
+                <span class="s-block">inline-block</span>
+            </div>
+        </div>
+
+        <p class="catatan">
+            <b>Ingat:</b> <code>height: 50%</code> sering tidak berhasil karena parent-nya belum
+            punya tinggi yang jelas. Persen tinggi butuh acuan.
+        </p>
+    </section>
+
+
+    <!-- ===== 2. MIN & MAX ===== -->
+    <section class="materi">
+        <h2>2. Min &amp; Max</h2>
+        <p>
+            <code>min-width</code>, <code>max-width</code>, <code>min-height</code>, dan
+            <code>max-height</code> memberi <b>batas</b> ukuran supaya layout fleksibel.
+        </p>
+
+        <h3>max-width: lebar mengikuti parent, tapi ada batasnya</h3>
+        <div class="maks">width: 100%; max-width: 300px;</div>
+        <p>Coba kecilkan jendela browser: kotak ini menyusut. Saat jendela lebar, kotak berhenti di 300px.</p>
+
+        <h3>min-height: tinggi minimal, boleh tumbuh</h3>
+        <div class="baris">
+            <div class="demo">
+                <span class="label">teks pendek</span>
+                <div class="min-tinggi">Isi sedikit, tinggi tetap 100px.</div>
+            </div>
+            <div class="demo">
+                <span class="label">teks panjang</span>
+                <div class="min-tinggi">Isi banyak membuat kotak bertambah tinggi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis possimus aliquid tenetur nam ut reiciendis.</div>
+            </div>
+        </div>
+
+        <h3>Pola yang sering dipakai</h3>
+<pre><code>img {
+  max-width: 100%;  /* gambar tidak pernah melebihi parent */
+  height: auto;     /* proporsi tetap */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;   /* di tengah halaman */
+}</code></pre>
+    </section>
+
+
+    <!-- ===== 3. BOX-SIZING ===== -->
+    <section class="materi">
+        <h2>3. Box-sizing</h2>
+        <p>
+            Secara default (<code>content-box</code>), <code>width</code> hanya menghitung isi.
+            Padding dan border ditambahkan di luarnya. Dengan <code>border-box</code>,
+            padding dan border sudah termasuk.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">content-box: total 250px</span>
+                <div class="cb">width 200 + padding 40 + border 10</div>
+            </div>
+            <div class="demo">
+                <span class="label">border-box: total 200px</span>
+                <div class="bb">width 200 sudah termasuk semuanya</div>
+            </div>
+        </div>
+
+<pre><code>* {
+  box-sizing: border-box;  /* taruh di paling atas CSS */
+}</code></pre>
+        <p class="catatan">Tip: buka DevTools (F12), klik elemennya, dan lihat diagram ukuran di tab Computed.</p>
+    </section>
+
+
+    <!-- ===== 4. OVERFLOW ===== -->
+    <section class="materi">
+        <h2>4. Overflow</h2>
+        <p>
+            Overflow terjadi saat <b>isi lebih besar dari kotaknya</b>. Ini hanya muncul kalau
+            kotak punya ukuran tetap. Kalau <code>height: auto</code>, kotak menyesuaikan isinya.
+        </p>
+
+        <!-- label di atas kotak supaya teks yang tumpah tidak menimpa label -->
+        <div class="baris baris-overflow">
+            <div class="demo">
+                <span class="label">overflow: visible</span>
+                <div class="kotak o-visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis possimus, aliquid tenetur nam ut reiciendis, ab sunt, consequatur voluptas et aut enim omnis assumenda ipsam similique itaque illum sequi?</div>
+            </div>
+            <div class="demo">
+                <span class="label">overflow: hidden</span>
+                <div class="kotak o-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis possimus, aliquid tenetur nam ut reiciendis, ab sunt, consequatur voluptas et aut enim omnis assumenda ipsam similique itaque illum sequi?</div>
+            </div>
+            <div class="demo">
+                <span class="label">overflow: scroll</span>
+                <div class="kotak o-scroll">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis possimus, aliquid tenetur nam ut reiciendis, ab sunt, consequatur voluptas et aut enim omnis assumenda ipsam similique itaque illum sequi?</div>
+            </div>
+            <div class="demo">
+                <span class="label">overflow: auto</span>
+                <div class="kotak o-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis possimus, aliquid tenetur nam ut reiciendis, ab sunt, consequatur voluptas et aut enim omnis assumenda ipsam similique itaque illum sequi?</div>
+            </div>
+        </div>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Nilai</th><th>Isi berlebih</th><th>Scrollbar</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>visible</code></td><td>Tumpah keluar kotak (default)</td><td>Tidak ada</td></tr>
+                    <tr><td><code>hidden</code></td><td>Dipotong</td><td>Tidak ada</td></tr>
+                    <tr><td><code>scroll</code></td><td>Bisa di-scroll</td><td>Selalu tampil</td></tr>
+                    <tr><td><code>auto</code></td><td>Bisa di-scroll</td><td>Hanya kalau perlu</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- ===== 5. OVERFLOW-X & OVERFLOW-Y ===== -->
+    <section class="materi">
+        <h2>5. Overflow-x &amp; Overflow-y</h2>
+        <p>Mengatur arah secara terpisah: <code>x</code> horizontal, <code>y</code> vertikal.</p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">x: auto, y: hidden</span>
+                <div class="ox">Teks satu baris yang sangat panjang sehingga harus digeser ke samping untuk membacanya sampai habis.</div>
+            </div>
+            <div class="demo">
+                <span class="label">y: auto, x: hidden</span>
+                <div class="oy">Teks ini panjang ke bawah sehingga muncul scrollbar vertikal. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis possimus, aliquid tenetur nam ut reiciendis, ab sunt, consequatur voluptas et aut enim omnis assumenda.</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 6. TEXT-OVERFLOW ===== -->
+    <section class="materi">
+        <h2>6. Memotong teks dengan titik tiga</h2>
+        <p>
+            Butuh tiga property sekaligus: <code>white-space: nowrap</code>,
+            <code>overflow: hidden</code>, dan <code>text-overflow: ellipsis</code>.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">dengan ellipsis</span>
+                <div class="elipsis">Ini adalah judul artikel yang sangat panjang sekali</div>
+            </div>
+            <div class="demo">
+                <span class="label">tanpa text-overflow</span>
+                <div class="potong">Ini adalah judul artikel yang sangat panjang sekali</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 7. RINGKASAN ===== -->
+    <section class="materi">
+        <h2>7. Ringkasan</h2>
+        <ul>
+            <li><code>width</code>/<code>height</code> hanya berlaku di block dan inline-block.</li>
+            <li><code>min-</code> dan <code>max-</code> memberi batas supaya layout fleksibel.</li>
+            <li><code>box-sizing: border-box</code> membuat padding dan border ikut dihitung.</li>
+            <li>Overflow baru muncul kalau kotak punya ukuran tetap.</li>
+            <li><code>auto</code> adalah pilihan overflow paling rapi, scrollbar muncul hanya kalau perlu.</li>
+            <li><code>hidden</code> memotong isi, jadi hati-hati agar tidak ada konten penting yang hilang.</li>
+        </ul>
+    </section>
+
+</div>
+</body>
+</html>
