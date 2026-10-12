@@ -1,0 +1,295 @@
+/* ==========================================================
+   MARGIN - CSS dasar
+   Bagian 1: pengaturan umum halaman
+   Bagian 2: komponen tampilan (judul, kartu materi, tabel, kode)
+   Bagian 3: contoh demo untuk tiap materi
+   ========================================================== */
+
+
+/* ---------- BAGIAN 1: PENGATURAN UMUM ---------- */
+
+/* box-sizing: border-box -> width sudah termasuk padding dan border */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8eef3;
+    color: #2b2f33;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+/* max-width + margin auto -> konten di tengah, menyusut di layar kecil */
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #1e3a5f;
+}
+
+
+/* ---------- BAGIAN 2: KOMPONEN TAMPILAN ---------- */
+
+.judul {
+    background-color: #1e3a5f;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-bottom: 6px solid #0f766e;
+}
+
+.judul h1 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.judul p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* kartu putih untuk tiap materi */
+.materi {
+    background-color: #ffffff;
+    border-left: 6px solid #0f766e;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.materi h2 {
+    margin-top: 0;
+}
+
+.materi h3 {
+    color: #0f766e;
+}
+
+code {
+    background-color: #eef4f6;
+    color: #b45309;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.catatan {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+}
+
+/* tabel bisa digeser ke samping di layar kecil */
+.tabel-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+}
+
+/* nth-child: baris genap diberi warna selang-seling */
+tbody tr:nth-child(even) {
+    background-color: #eef4f6;
+}
+
+
+/* ---------- BAGIAN 3: CONTOH DEMO ---------- */
+
+/* .area = bidang abu-abu tempat contoh margin.
+   Margin bersifat transparan, jadi warna abu-abu ini yang
+   memperlihatkan ruang margin.
+   Border pada .area mencegah margin anak "bocor" keluar (collapse dengan parent). */
+.area {
+    background-color: #e2e8f0;
+    border: 2px solid #94a3b8;
+    margin-bottom: 15px;
+}
+
+.baris {
+    margin-bottom: 10px;
+}
+
+/* inline-block -> demo berjajar ke samping */
+.demo {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 14px 14px 0;
+}
+
+.label {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+/* kotak berwarna dasar yang dipakai banyak demo */
+.contoh-margin, .tengah, .tanpa-lebar,
+.c-a, .c-b, .h-a, .h-b, .n-a, .n-b {
+    padding: 10px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+
+/* --- Demo 1: cara pakai --- */
+
+.contoh-margin {
+    background-color: #0f766e;
+    margin-top: 20px;       /* jarak ke tepi atas area */
+    margin-left: 40px;      /* jarak ke tepi kiri area */
+}
+
+
+/* --- Demo 2: shorthand --- */
+
+.area-mini {
+    width: 160px;
+    background-color: #e2e8f0;
+    border: 2px solid #94a3b8;
+}
+
+/* kotak kecil di dalam area-mini; ruang abu-abu di sekitarnya = margin */
+.sh-1, .sh-2, .sh-3, .sh-4 {
+    height: 30px;
+    background-color: #0f766e;
+}
+
+.sh-1 { margin: 10px; }                   /* semua sisi */
+.sh-2 { margin: 10px 30px; }              /* atas-bawah | kiri-kanan */
+.sh-3 { margin: 5px 10px 20px; }          /* atas | kiri-kanan | bawah */
+.sh-4 { margin: 5px 10px 15px 30px; }     /* atas | kanan | bawah | kiri */
+
+
+/* --- Demo 3: auto --- */
+
+.tengah {
+    width: 200px;
+    margin: 0 auto;         /* atas-bawah 0, kiri-kanan auto -> di tengah */
+    background-color: #0f766e;
+}
+
+.tanpa-lebar {
+    margin: 10px auto 0 auto;   /* auto tidak berpengaruh: width-nya auto, sudah penuh */
+    background-color: #1e3a5f;
+}
+
+
+/* --- Demo 4: margin collapse --- */
+
+/* vertikal: 40px + 40px menyatu jadi 40px */
+.c-a {
+    background-color: #0f766e;
+    margin-bottom: 40px;
+}
+
+.c-b {
+    background-color: #1e3a5f;
+    margin-top: 40px;
+}
+
+/* horizontal: inline-block, margin kiri-kanan dijumlahkan jadi 40px.
+   (Spasi kecil tambahan muncul karena enter di HTML dihitung sebagai teks;
+   di HTML kedua div ditulis rapat agar tidak ada spasi itu.) */
+.h-a, .h-b {
+    display: inline-block;
+}
+
+.h-a {
+    background-color: #0f766e;
+    margin-right: 20px;
+}
+
+.h-b {
+    background-color: #1e3a5f;
+    margin-left: 20px;
+}
+
+
+/* --- Demo 5: margin negatif --- */
+
+.n-a {
+    background-color: #0f766e;
+    height: 60px;
+}
+
+/* elemen yang muncul belakangan tampil di atas elemen sebelumnya */
+.n-b {
+    background-color: #db2777;
+    margin-top: -20px;      /* naik 20px, menimpa kotak A */
+    margin-left: 40px;      /* bergeser 40px ke kanan */
+}
+
+
+/* --- Demo 6: latihan tiga kotak --- */
+
+/* beda dengan kode awal: aturan "div { display: inline-block }" yang
+   dikomentari tidak dipakai, karena inline-block akan menghilangkan
+   margin collapse dan membuat kotak berjajar ke samping. */
+
+.satu {
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    margin: 50px auto;      /* atas-bawah 50px, kiri-kanan auto (tengah) */
+}
+
+.dua {
+    width: 100px;
+    height: 100px;
+    background-color: violet;
+    margin-top: 50px;       /* menyatu dengan margin-bottom kotak 1 -> jarak 50px */
+    margin-bottom: 50px;    /* kalah besar oleh margin-top kotak 3 -> jarak 100px */
+}                           /* tanpa auto, jadi tetap di kiri */
+
+.tiga {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    margin: 100px auto;     /* atas-bawah 100px, kiri-kanan auto (tengah) */
+}
+
+/* kotak 1, 2, dan 3 berada di .area, jadi dirapikan teksnya di sini */
+.satu, .dua, .tiga {
+    color: #1e293b;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tiga {
+    color: #ffffff;
+}

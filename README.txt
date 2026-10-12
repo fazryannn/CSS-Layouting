@@ -7,8 +7,8 @@
 12 Okt 2026
 3. Latihan-3
     Box model (content, padding, border, margin), shorthand, margin: 0 auto, margin collapse, box-sizing
-
-
+4. Latihan-4
+     Margin (per sisi, shorthand, auto, margin collapse, margin negatif)
 
 Sumber Belajar
 Youtube WPU

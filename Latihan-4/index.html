@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Margin CSS Layouting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>Margin</h1>
+        <p>Catatan belajar CSS layouting: jarak di luar kotak. Area abu-abu pada contoh menunjukkan ruang margin.</p>
+    </header>
+
+
+    <!-- ===== 1. CARA PAKAI ===== -->
+    <section class="materi">
+        <h2>1. Cara Pakai</h2>
+        <p>
+            Margin mengatur jarak <b>di luar</b> border. Bisa diatur per sisi:
+            <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>,
+            <code>margin-left</code>. Satuannya sama seperti width: <code>px</code>,
+            <code>%</code>, <code>rem</code>, atau <code>auto</code>.
+        </p>
+
+<pre><code>.kotak {
+  margin-top: 20px;
+  margin-left: 40px;
+}</code></pre>
+
+        <!-- area abu-abu = ruang yang ditempati margin -->
+        <div class="area">
+            <div class="contoh-margin">margin-top 20px, margin-left 40px</div>
+        </div>
+    </section>
+
+
+    <!-- ===== 2. SHORTHAND ===== -->
+    <section class="materi">
+        <h2>2. Shorthand</h2>
+        <p>
+            Margin bisa ditulis dalam 1 sampai 4 nilai. Urutan 4 nilai:
+            <b>atas, kanan, bawah, kiri</b> (searah jarum jam).
+        </p>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Penulisan</th><th>Artinya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>margin: 10px</code></td><td>Semua sisi 10px</td></tr>
+                    <tr><td><code>margin: 10px 30px</code></td><td>Atas-bawah 10px, kiri-kanan 30px</td></tr>
+                    <tr><td><code>margin: 5px 10px 20px</code></td><td>Atas 5px, kiri-kanan 10px, bawah 20px</td></tr>
+                    <tr><td><code>margin: 5px 10px 15px 30px</code></td><td>Atas, kanan, bawah, kiri</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">10px</span>
+                <div class="area-mini"><div class="sh-1"></div></div>
+            </div>
+            <div class="demo">
+                <span class="label">10px 30px</span>
+                <div class="area-mini"><div class="sh-2"></div></div>
+            </div>
+            <div class="demo">
+                <span class="label">5px 10px 20px</span>
+                <div class="area-mini"><div class="sh-3"></div></div>
+            </div>
+            <div class="demo">
+                <span class="label">5px 10px 15px 30px</span>
+                <div class="area-mini"><div class="sh-4"></div></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 3. AUTO ===== -->
+    <section class="materi">
+        <h2>3. Margin Auto</h2>
+        <p>
+            <code>margin: 0 auto</code> menengahkan elemen block secara horizontal.
+            Browser membagi sisa ruang kiri dan kanan sama rata.
+            Syaratnya, elemen harus punya <code>width</code> atau <code>max-width</code>.
+        </p>
+
+        <div class="area">
+            <div class="tengah">width 200px + margin 0 auto: di tengah</div>
+            <div class="tanpa-lebar">tanpa width: auto tidak berpengaruh, kotak sudah selebar parent</div>
+        </div>
+
+        <p class="catatan">
+            <b>Ingat:</b> <code>auto</code> hanya bekerja untuk kiri-kanan.
+            <code>margin-top: auto</code> tidak menengahkan secara vertikal.
+        </p>
+    </section>
+
+
+    <!-- ===== 4. MARGIN COLLAPSE (OVERLAPPING) ===== -->
+    <section class="materi">
+        <h2>4. Margin Collapse (Overlapping)</h2>
+        <p>
+            Margin <b>vertikal</b> yang bertemu akan <b>menyatu</b>, bukan dijumlahkan.
+            Yang dipakai adalah nilai yang paling besar.
+        </p>
+
+        <h3>Vertikal: menyatu</h3>
+        <div class="area">
+            <div class="c-a">A: margin-bottom 40px</div>
+            <div class="c-b">B: margin-top 40px</div>
+        </div>
+        <p>Jarak A ke B hanya <b>40px</b>, bukan 80px.</p>
+
+        <h3>Horizontal: tidak menyatu</h3>
+        <div class="area">
+            <div class="h-a">A: margin-right 20px</div><div class="h-b">B: margin-left 20px</div>
+        </div>
+        <p>Jarak A ke B adalah <b>40px</b> (20 + 20), karena margin kiri-kanan dijumlahkan.</p>
+
+        <p class="catatan">
+            Margin collapse <b>tidak terjadi</b> pada elemen inline-block, flex item, dan grid item.
+            Antara parent dan anak juga tidak terjadi kalau parent punya border atau padding.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. MARGIN NEGATIF ===== -->
+    <section class="materi">
+        <h2>5. Margin Negatif</h2>
+        <p>
+            Margin boleh bernilai negatif. Elemen akan <b>tertarik</b> ke arah sisi itu
+            sehingga bisa menimpa elemen lain. (Padding tidak boleh negatif.)
+        </p>
+
+        <div class="area">
+            <div class="n-a">A: kotak biasa</div>
+            <div class="n-b">B: margin-top -20px, margin-left 40px</div>
+        </div>
+        <p>Kotak B naik 20px sehingga menimpa sebagian kotak A, dan bergeser 40px ke kanan.</p>
+    </section>
+
+
+    <!-- ===== 6. LATIHAN: TIGA KOTAK ===== -->
+    <section class="materi">
+        <h2>6. Latihan: Tiga Kotak</h2>
+        <p>Gabungan semua konsep di atas. Area abu-abu menunjukkan ruang margin.</p>
+
+        <div class="area latihan">
+            <div class="satu">1</div>
+            <div class="dua">2</div>
+            <div class="tiga">3</div>
+        </div>
+
+        <ul>
+            <li><b>Kotak 1</b>: margin atas-bawah 50px, kiri-kanan auto, jadi di tengah.</li>
+            <li><b>Kotak 2</b>: margin atas-bawah 50px, tanpa auto, jadi tetap di kiri.</li>
+            <li><b>Kotak 3</b>: margin atas-bawah 100px, kiri-kanan auto, jadi di tengah.</li>
+            <li>Jarak 1 ke 2 adalah <b>50px</b> (50 dan 50 menyatu), bukan 100px.</li>
+            <li>Jarak 2 ke 3 adalah <b>100px</b> (100 lebih besar dari 50), bukan 150px.</li>
+        </ul>
+    </section>
+
+
+    <!-- ===== 7. KESIMPULAN ===== -->
+    <section class="materi">
+        <h2>7. Kesimpulan</h2>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Konsep</th><th>Intinya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cara pakai</td><td>Jarak di luar border, bisa per sisi (<code>margin-top</code>, dst.)</td></tr>
+                    <tr><td>Shorthand</td><td>1 sampai 4 nilai, urutan atas, kanan, bawah, kiri</td></tr>
+                    <tr><td>Auto</td><td><code>margin: 0 auto</code> menengahkan elemen block yang punya lebar</td></tr>
+                    <tr><td>Collapse</td><td>Margin vertikal menyatu (yang terbesar dipakai), horizontal dijumlahkan</td></tr>
+                    <tr><td>Negatif</td><td>Menarik elemen ke arah sisi itu dan bisa menimpa elemen lain</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>
