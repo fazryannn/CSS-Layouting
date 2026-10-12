@@ -4,6 +4,11 @@
 11 Okt 2026
 2. Latihan-2
     Dimensi (width, height, min, max, box-sizing) dan Overflow (visible, hidden, scroll, auto, overflow-x, overflow-y, text-overflow)
+12 Okt 2026
+3. Latihan-3
+    Box model (content, padding, border, margin), shorthand, margin: 0 auto, margin collapse, box-sizing
+
+
 
 Sumber Belajar
 Youtube WPU

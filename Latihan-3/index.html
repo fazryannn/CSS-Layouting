@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Model CSS Layouting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>Box Model</h1>
+        <p>Catatan belajar CSS layouting: setiap elemen HTML adalah sebuah kotak dengan 4 lapisan.</p>
+    </header>
+
+
+    <!-- ===== 1. KONSEP 4 LAPISAN ===== -->
+    <section class="materi">
+        <h2>1. Empat Lapisan Kotak</h2>
+        <p>Dari dalam ke luar: <b>content</b>, <b>padding</b>, <b>border</b>, lalu <b>margin</b>.</p>
+
+        <!-- diagram: kotak bersarang, tiap lapisan diberi warna sendiri -->
+        <div class="lap-margin">
+            MARGIN
+            <div class="lap-border">
+                BORDER
+                <div class="lap-padding">
+                    PADDING
+                    <div class="lap-content">CONTENT</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Lapisan</th><th>Seperti bingkai foto</th><th>Fungsi</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>content</code></td><td>Fotonya</td><td>Isi elemen (teks, gambar)</td></tr>
+                    <tr><td><code>padding</code></td><td>Ruang putih antara foto dan bingkai</td><td>Jarak di dalam kotak</td></tr>
+                    <tr><td><code>border</code></td><td>Bingkainya</td><td>Garis tepi</td></tr>
+                    <tr><td><code>margin</code></td><td>Jarak ke bingkai lain di dinding</td><td>Jarak di luar kotak</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- ===== 2. PADDING ===== -->
+    <section class="materi">
+        <h2>2. Padding</h2>
+        <p>
+            Jarak antara isi dan border. Padding berada <b>di dalam</b> kotak,
+            jadi ikut terwarnai oleh <code>background</code>.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">padding: 0</span>
+                <div class="p-tanpa">Teks menempel di tepi</div>
+            </div>
+            <div class="demo">
+                <span class="label">padding: 20px</span>
+                <div class="p-dengan">Teks punya ruang napas</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 3. BORDER ===== -->
+    <section class="materi">
+        <h2>3. Border</h2>
+        <p>
+            Garis tepi kotak. Ditulis dalam 3 bagian:
+            <b>ketebalan, jenis garis, warna</b>.
+        </p>
+
+<pre><code>border: 2px solid red;</code></pre>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">solid</span>
+                <div class="b-solid">Garis penuh</div>
+            </div>
+            <div class="demo">
+                <span class="label">dashed</span>
+                <div class="b-dashed">Garis putus</div>
+            </div>
+            <div class="demo">
+                <span class="label">dotted</span>
+                <div class="b-dotted">Garis titik</div>
+            </div>
+            <div class="demo">
+                <span class="label">double</span>
+                <div class="b-double">Garis ganda</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 4. MARGIN ===== -->
+    <section class="materi">
+        <h2>4. Margin</h2>
+        <p>
+            Jarak antar elemen. Margin berada <b>di luar</b> border dan selalu transparan
+            (tidak ikut terwarnai background).
+        </p>
+
+        <h3>Margin collapse</h3>
+        <p>
+            Margin vertikal yang bertemu akan <b>menyatu</b>. Kotak A punya
+            <code>margin-bottom: 30px</code> dan kotak B punya <code>margin-top: 30px</code>,
+            tetapi jaraknya tetap <b>30px</b>, bukan 60px (yang terbesar yang dipakai).
+        </p>
+        <div class="area-margin">
+            <div class="m-a">Kotak A (margin-bottom 30px)</div>
+            <div class="m-b">Kotak B (margin-top 30px)</div>
+        </div>
+
+        <h3>margin: 0 auto</h3>
+        <p>Menengahkan elemen block secara horizontal. Syaratnya elemen harus punya <code>width</code> atau <code>max-width</code>.</p>
+        <div class="induk-tengah">
+            <div class="tengah">width 200px, margin 0 auto</div>
+        </div>
+
+        <p class="catatan">
+            <b>Ingat:</b> margin boleh bernilai negatif (misalnya <code>margin-top: -10px</code>),
+            padding tidak boleh.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. SHORTHAND ===== -->
+    <section class="materi">
+        <h2>5. Cara Menulis Singkat (Shorthand)</h2>
+        <p>
+            <code>padding</code> dan <code>margin</code> bisa ditulis dengan 1 sampai 4 nilai.
+            Urutan 4 nilai: <b>atas, kanan, bawah, kiri</b> (searah jarum jam).
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">padding: 10px</span>
+                <div class="sh-1">Semua sisi</div>
+            </div>
+            <div class="demo">
+                <span class="label">padding: 10px 30px</span>
+                <div class="sh-2">Atas-bawah, kiri-kanan</div>
+            </div>
+            <div class="demo">
+                <span class="label">padding: 5px 10px 20px</span>
+                <div class="sh-3">Atas, kiri-kanan, bawah</div>
+            </div>
+            <div class="demo">
+                <span class="label">padding: 5px 10px 15px 30px</span>
+                <div class="sh-4">Atas, kanan, bawah, kiri</div>
+            </div>
+        </div>
+
+<pre><code>margin-top: 20px;           /* satu sisi saja */
+padding-left: 15px;
+border-bottom: 2px solid black;</code></pre>
+    </section>
+
+
+    <!-- ===== 6. UKURAN TOTAL ===== -->
+    <section class="materi">
+        <h2>6. Menghitung Ukuran Total</h2>
+        <p>
+            Default-nya (<code>content-box</code>), <code>width</code> hanya menghitung content.
+            Dengan <code>border-box</code>, padding dan border sudah termasuk.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">content-box: total 250px</span>
+                <div class="cb">200 + padding 40 + border 10</div>
+            </div>
+            <div class="demo">
+                <span class="label">border-box: total 200px</span>
+                <div class="bb">Tetap 200px</div>
+            </div>
+        </div>
+
+<pre><code>* {
+  box-sizing: border-box;
+}</code></pre>
+        <p class="catatan">Tip: tekan F12, klik elemen, lalu lihat diagram box model berwarna di tab Computed.</p>
+    </section>
+
+
+    <!-- ===== 7. PERBANDINGAN & RINGKASAN ===== -->
+    <section class="materi">
+        <h2>7. Padding vs Margin</h2>
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th></th><th>Padding</th><th>Margin</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Posisi</td><td>Di dalam border</td><td>Di luar border</td></tr>
+                    <tr><td>Kena background</td><td>Ya</td><td>Tidak</td></tr>
+                    <tr><td>Bisa negatif</td><td>Tidak</td><td>Ya</td></tr>
+                    <tr><td>Bisa auto</td><td>Tidak</td><td>Ya</td></tr>
+                    <tr><td>Fungsi</td><td>Ruang napas isi</td><td>Jarak antar elemen</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Ringkasan</h3>
+        <ul>
+            <li>Setiap elemen adalah kotak: content, padding, border, margin.</li>
+            <li>Padding mengatur jarak di dalam, margin mengatur jarak di luar.</li>
+            <li>Shorthand 4 nilai: atas, kanan, bawah, kiri.</li>
+            <li>Pakai <code>box-sizing: border-box</code> supaya hitungan ukuran mudah.</li>
+            <li><code>margin: 0 auto</code> menengahkan elemen block yang punya lebar.</li>
+            <li>Margin vertikal bisa menyatu, yang dipakai adalah yang terbesar.</li>
+        </ul>
+    </section>
+
+</div>
+</body>
+</html>
