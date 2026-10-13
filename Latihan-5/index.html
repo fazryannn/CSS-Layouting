@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padding &amp; Border</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>Padding, Border &amp; Box-sizing</h1>
+        <p>Catatan belajar CSS layouting: lapisan di dalam kotak dan cara menghitung ukurannya.</p>
+    </header>
+
+
+    <!-- ===== 1. PADDING ===== -->
+    <section class="materi">
+        <h2>1. Padding</h2>
+        <p>
+            Jarak antara <b>isi (content)</b> dan <b>border</b>. Padding berada di dalam kotak,
+            jadi ikut terwarnai <code>background</code>. Pada contoh, kotak putih = content,
+            area oranye = padding.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">padding: 0</span>
+                <div class="pad p-0"><div class="isi">Teks</div></div>
+            </div>
+            <div class="demo">
+                <span class="label">padding: 20px</span>
+                <div class="pad p-20"><div class="isi">Teks</div></div>
+            </div>
+            <div class="demo">
+                <span class="label">padding: 10px 40px</span>
+                <div class="pad p-sisi"><div class="isi">Teks</div></div>
+            </div>
+        </div>
+
+        <h3>Penulisan</h3>
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Penulisan</th><th>Artinya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>padding: 10px</code></td><td>Semua sisi 10px</td></tr>
+                    <tr><td><code>padding: 10px 30px</code></td><td>Atas-bawah 10px, kiri-kanan 30px</td></tr>
+                    <tr><td><code>padding: 5px 10px 20px</code></td><td>Atas 5px, kiri-kanan 10px, bawah 20px</td></tr>
+                    <tr><td><code>padding: 5px 10px 15px 30px</code></td><td>Atas, kanan, bawah, kiri</td></tr>
+                    <tr><td><code>padding-left: 15px</code></td><td>Satu sisi saja</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="catatan">
+            <b>Aturan padding:</b> tidak boleh negatif, tidak bisa <code>auto</code>,
+            dan (secara default) <b>menambah ukuran kotak</b>.
+        </p>
+    </section>
+
+
+    <!-- ===== 2. BORDER ===== -->
+    <section class="materi">
+        <h2>2. Border</h2>
+        <p>
+            Garis tepi kotak. Ditulis dalam 3 bagian: <b>ketebalan, jenis garis, warna</b>.
+        </p>
+
+<pre><code>border: 3px solid red;
+/*      tebal jenis warna */</code></pre>
+
+        <h3>Jenis garis (border-style)</h3>
+        <div class="baris">
+            <div class="demo">
+                <span class="label">solid</span>
+                <div class="bd bd-solid">Garis penuh</div>
+            </div>
+            <div class="demo">
+                <span class="label">dashed</span>
+                <div class="bd bd-dashed">Garis putus</div>
+            </div>
+            <div class="demo">
+                <span class="label">dotted</span>
+                <div class="bd bd-dotted">Garis titik</div>
+            </div>
+            <div class="demo">
+                <span class="label">double</span>
+                <div class="bd bd-double">Garis ganda</div>
+            </div>
+        </div>
+
+        <h3>Ketebalan (border-width)</h3>
+        <div class="baris">
+            <div class="demo">
+                <span class="label">1px</span>
+                <div class="bd bd-1">Tipis</div>
+            </div>
+            <div class="demo">
+                <span class="label">4px</span>
+                <div class="bd bd-4">Sedang</div>
+            </div>
+            <div class="demo">
+                <span class="label">8px</span>
+                <div class="bd bd-8">Tebal</div>
+            </div>
+        </div>
+
+        <h3>Per sisi</h3>
+        <div class="baris">
+            <div class="demo">
+                <span class="label">border-bottom</span>
+                <div class="bd sisi-bawah">Garis bawah</div>
+            </div>
+            <div class="demo">
+                <span class="label">border-left</span>
+                <div class="bd sisi-kiri">Garis aksen</div>
+            </div>
+            <div class="demo">
+                <span class="label">tiap sisi beda</span>
+                <div class="bd sisi-beda">Campuran</div>
+            </div>
+        </div>
+
+<pre><code>border-bottom: 2px solid black;   /* satu sisi */
+border-width: 1px 2px 3px 4px;    /* atas, kanan, bawah, kiri */
+border-style: solid dashed;       /* atas-bawah solid, kiri-kanan dashed */
+border-color: red blue;           /* atas-bawah merah, kiri-kanan biru */</code></pre>
+
+        <p class="catatan">
+            <b>Ingat:</b> jenis <code>double</code> butuh ketebalan minimal 3px.
+            Border tanpa <code>border-style</code> tidak akan tampil.
+        </p>
+    </section>
+
+
+    <!-- ===== 3. BOX-SIZING ===== -->
+    <section class="materi">
+        <h2>3. Box-sizing</h2>
+        <p>
+            Menentukan apa yang dihitung oleh <code>width</code> dan <code>height</code>.
+        </p>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Nilai</th><th>width mencakup</th><th>Rumus lebar total</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>content-box</code> (default)</td><td>Content saja</td><td>width + padding + border</td></tr>
+                    <tr><td><code>border-box</code></td><td>Content + padding + border</td><td>= width</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">content-box: total 250px</span>
+                <div class="cb">200 + padding 40 + border 10</div>
+            </div>
+            <div class="demo">
+                <span class="label">border-box: total 200px</span>
+                <div class="bb">Tetap 200px, content jadi 150px</div>
+            </div>
+        </div>
+
+        <h3>Masalah nyata: width 100% + padding</h3>
+        <p>Kotak merah-muda memakai <code>width: 100%</code> dan <code>padding: 20px</code> di dalam parent 300px.</p>
+        <div class="baris">
+            <div class="demo">
+                <span class="label">content-box: keluar dari parent</span>
+                <div class="induk"><div class="k-cb">100% + padding + border</div></div>
+            </div>
+            <div class="demo">
+                <span class="label">border-box: pas di parent</span>
+                <div class="induk"><div class="k-bb">100% sudah termasuk semuanya</div></div>
+            </div>
+        </div>
+
+<pre><code>* {
+  box-sizing: border-box;   /* taruh di paling atas CSS */
+}</code></pre>
+    </section>
+
+
+    <!-- ===== 4. LATIHAN ===== -->
+    <section class="materi">
+        <h2>4. Latihan</h2>
+        <p>
+            Ketiga kotak berukuran <b>600 x 200</b> dengan <code>box-sizing: border-box</code>,
+            jadi ukuran tetap walaupun padding dan border berbeda. Yang berubah hanya ukuran area isinya.
+        </p>
+
+        <div class="kotak">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Dolore consectetur veniam vitae possimus, reiciendis architecto
+            quas odio? Obcaecati optio error ex quo adipisci! Fugiat sit quo quae
+            aperiam blanditiis ad.
+        </div>
+
+        <div class="kotak satu">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo optio dicta dolorem ex neque doloribus beatae, obcaecati vitae dignissimos? Suscipit ad modi facilis molestiae ipsum rem asperiores officia eligendi consequuntur.
+        </div>
+
+        <div class="kotak dua">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta eveniet hic sit similique harum inventore, aperiam, dolor totam, omnis ipsa ut voluptate. Aut neque labore fugiat consequuntur necessitatibus veritatis laudantium!
+        </div>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Kotak</th><th>Padding</th><th>Border</th><th>Ukuran total</th><th>Area isi</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Pertama (oranye muda)</td><td>50px</td><td>5px solid</td><td>600 x 200</td><td>490 x 90</td></tr>
+                    <tr><td><code>.satu</code></td><td>10px</td><td>4px dashed</td><td>600 x 200</td><td>572 x 172</td></tr>
+                    <tr><td><code>.dua</code></td><td>20px</td><td>5px solid</td><td>600 x 200</td><td>550 x 150</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="catatan">
+            Rumus area isi (border-box): lebar = 600 - (padding x 2) - (border x 2).
+            Tinggi dihitung dengan cara yang sama dari 200.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. KESIMPULAN ===== -->
+    <section class="materi">
+        <h2>5. Kesimpulan</h2>
+        <ul>
+            <li><b>Padding</b> adalah jarak di dalam border. Ikut terwarnai background, tidak boleh negatif, tidak bisa auto.</li>
+            <li><b>Border</b> adalah garis tepi: ketebalan, jenis garis, warna. Bisa diatur per sisi.</li>
+            <li>Secara default padding dan border <b>menambah</b> ukuran kotak (<code>content-box</code>).</li>
+            <li>Dengan <code>border-box</code>, <code>width</code> sudah mencakup padding dan border, jadi ukuran lebih mudah diprediksi.</li>
+            <li>Tulis <code>* { box-sizing: border-box; }</code> di paling atas CSS.</li>
+        </ul>
+    </section>
+
+</div>
+</body>
+</html>

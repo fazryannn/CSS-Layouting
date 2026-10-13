@@ -1,0 +1,273 @@
+/* ==========================================================
+   PADDING, BORDER & BOX-SIZING - CSS dasar
+   Bagian 1: pengaturan umum halaman
+   Bagian 2: komponen tampilan (judul, kartu materi, tabel, kode)
+   Bagian 3: contoh demo untuk tiap materi
+   ========================================================== */
+
+
+/* ---------- BAGIAN 1: PENGATURAN UMUM ---------- */
+
+/* box-sizing: border-box -> width sudah termasuk padding dan border.
+   Ini juga yang membuat kotak latihan tetap 600 x 200. */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8eef3;
+    color: #2b2f33;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+/* max-width + margin auto -> konten di tengah, menyusut di layar kecil */
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #1e3a5f;
+}
+
+
+/* ---------- BAGIAN 2: KOMPONEN TAMPILAN ---------- */
+
+.judul {
+    background-color: #1e3a5f;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-bottom: 6px solid #0f766e;
+}
+
+.judul h1 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.judul p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* kartu putih untuk tiap materi */
+.materi {
+    background-color: #ffffff;
+    border-left: 6px solid #0f766e;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.materi h2 {
+    margin-top: 0;
+}
+
+.materi h3 {
+    color: #0f766e;
+}
+
+code {
+    background-color: #eef4f6;
+    color: #b45309;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.catatan {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+}
+
+/* tabel bisa digeser ke samping di layar kecil */
+.tabel-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+}
+
+/* nth-child: baris genap diberi warna selang-seling */
+tbody tr:nth-child(even) {
+    background-color: #eef4f6;
+}
+
+
+/* ---------- BAGIAN 3: CONTOH DEMO ---------- */
+
+.baris {
+    margin-bottom: 10px;
+}
+
+/* inline-block -> demo berjajar ke samping, tetap bisa diatur ukurannya */
+.demo {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 14px 14px 0;
+}
+
+.label {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+
+/* --- Demo 1: padding ---
+   Warna oranye = padding, kotak putih (.isi) = content.
+   Hanya padding yang berbeda di antara ketiganya. */
+.pad {
+    background-color: #fdba74;
+    border: 2px solid #c2410c;
+}
+
+.isi {
+    background-color: #ffffff;
+    padding: 4px 8px;           /* jarak teks di dalam kotak putih saja */
+    font-size: 14px;
+}
+
+.p-0    { padding: 0; }                 /* tanpa padding */
+.p-20   { padding: 20px; }              /* semua sisi 20px */
+.p-sisi { padding: 10px 40px; }         /* atas-bawah 10px, kiri-kanan 40px */
+
+
+/* --- Demo 2: border --- */
+
+/* kotak dasar untuk semua contoh border */
+.bd {
+    padding: 10px 16px;
+    font-size: 14px;
+    background-color: #fef3c7;
+}
+
+/* jenis garis: tebal dan warna sama, hanya style yang beda */
+.bd-solid  { border: 5px solid #0f766e; }
+.bd-dashed { border: 5px dashed #0f766e; }
+.bd-dotted { border: 5px dotted #0f766e; }
+.bd-double { border: 5px double #0f766e; }   /* double butuh minimal 3px */
+
+/* ketebalan: hanya angka yang beda */
+.bd-1 { border: 1px solid #1e3a5f; }
+.bd-4 { border: 4px solid #1e3a5f; }
+.bd-8 { border: 8px solid #1e3a5f; }
+
+/* per sisi: sisi lain tidak punya border */
+.sisi-bawah { border-bottom: 4px solid #db2777; }
+.sisi-kiri  { border-left: 8px solid #db2777; }
+
+/* tiap sisi punya gaya sendiri */
+.sisi-beda {
+    border-top: 4px solid #0f766e;
+    border-right: 4px dashed #db2777;
+    border-bottom: 4px double #1e3a5f;
+    border-left: 4px dotted #f59e0b;
+}
+
+
+/* --- Demo 3: box-sizing --- */
+
+/* ukuran dan hiasan sama, hanya box-sizing yang beda */
+.cb, .bb {
+    width: 200px;
+    padding: 20px;
+    border: 5px solid #1e3a5f;
+    background-color: #dbeafe;
+    font-size: 14px;
+}
+
+.cb {
+    box-sizing: content-box;   /* total 200 + 40 + 10 = 250px */
+}
+
+.bb {
+    box-sizing: border-box;    /* total tetap 200px */
+}
+
+/* masalah nyata: width 100% + padding */
+.induk {
+    width: 300px;
+    border: 2px dashed #94a3b8;
+}
+
+.k-cb, .k-bb {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #db2777;
+    background-color: #fce7f3;
+    font-size: 14px;
+}
+
+.k-cb {
+    box-sizing: content-box;   /* 100% + 40 + 4 -> melebihi parent */
+}
+
+.k-bb {
+    box-sizing: border-box;    /* 100% sudah termasuk padding dan border */
+}
+
+
+/* --- Demo 4: latihan ---
+   Di kode awal, ini ditulis sebagai aturan  div { ... }  yang mengenai
+   SEMUA div. Di halaman ini dipindah ke class .kotak supaya
+   pembungkus halaman dan demo lain tidak ikut berubah. */
+.kotak {
+    width: 600px;
+    max-width: 100%;            /* di layar kecil kotak menyusut, tidak melebar keluar */
+    height: 200px;
+    background-color: coral;
+    margin: 10px auto;          /* atas-bawah 10px, kiri-kanan auto (tengah) */
+    padding: 50px;              /* auto dan negatif tidak berlaku pada padding */
+    border: 5px solid black;
+    overflow: auto;             /* kalau isi terlalu panjang, bisa di-scroll */
+}
+
+/* .satu dan .dua menimpa sebagian aturan .kotak (yang ditulis belakangan menang) */
+.satu {
+    background-color: orange;
+    padding: 10px;
+    border: 4px dashed red;
+}
+
+.dua {
+    background-color: blue;
+    color: #ffffff;             /* ditambahkan supaya teks terbaca di latar biru */
+    padding: 20px;
+    border: 5px solid green;
+}
