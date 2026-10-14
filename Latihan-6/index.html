@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Reset</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>CSS Reset</h1>
+        <p>Catatan belajar CSS layouting: menyamakan titik awal tampilan di semua browser.</p>
+    </header>
+
+
+    <!-- ===== 1. APA ITU CSS RESET ===== -->
+    <section class="materi">
+        <h2>1. Apa itu CSS Reset?</h2>
+        <p>
+            Setiap browser punya <b>stylesheet bawaan</b> (user agent stylesheet). Karena itu
+            HTML tanpa CSS pun sudah punya tampilan: judul besar dan tebal, paragraf berjarak,
+            list berbullet, link biru bergaris bawah.
+        </p>
+        <p>
+            Masalahnya, bawaan ini <b>sedikit berbeda antar browser</b>, dan sering mengganggu
+            saat kita ingin mengatur layout sendiri. <b>CSS Reset</b> adalah sekumpulan aturan
+            yang menghapus gaya bawaan itu, supaya semua browser mulai dari titik yang sama.
+        </p>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Elemen</th><th>Gaya bawaan browser</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>body</code></td><td>margin 8px</td></tr>
+                    <tr><td><code>h1</code> - <code>h6</code></td><td>Ukuran besar, tebal, punya margin atas-bawah</td></tr>
+                    <tr><td><code>p</code></td><td>margin atas-bawah 1em</td></tr>
+                    <tr><td><code>ul</code>, <code>ol</code></td><td>padding kiri 40px, ada bullet atau nomor</td></tr>
+                    <tr><td><code>a</code></td><td>Biru dan bergaris bawah</td></tr>
+                    <tr><td><code>strong</code>, <code>em</code></td><td>Tebal dan miring</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- ===== 2. LATIHAN: SEBELUM DAN SESUDAH ===== -->
+    <section class="materi">
+        <h2>2. Latihan: Sebelum dan Sesudah</h2>
+        <p>
+            Isi yang sama dipakai di semua kotak: kotak hitam 200 x 200, judul, paragraf,
+            dan (ditambahkan agar efeknya lebih terlihat) list dan teks tebal.
+            Area dengan garis putus-putus adalah batas tiap contoh.
+        </p>
+
+        <div class="baris">
+            <!-- 1) tampilan bawaan browser -->
+            <div class="demo">
+                <span class="label">tanpa reset</span>
+                <div class="area-demo">
+                    <div class="kotak-hitam"></div>
+                    <h1>CSS Reset</h1>
+                    <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit. Est natus perferendis hic autem enim.</p>
+                    <ul>
+                        <li>Item satu</li>
+                        <li>Item dua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2) setelah reset: kelas .reset -->
+            <div class="demo">
+                <span class="label">dengan reset</span>
+                <div class="area-demo reset">
+                    <div class="kotak-hitam"></div>
+                    <h1>CSS Reset</h1>
+                    <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit. Est natus perferendis hic autem enim.</p>
+                    <ul>
+                        <li>Item satu</li>
+                        <li>Item dua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3) reset lalu diberi gaya sendiri: kelas .reset + .rapi -->
+            <div class="demo">
+                <span class="label">reset + gaya sendiri</span>
+                <div class="area-demo reset rapi">
+                    <div class="kotak-hitam"></div>
+                    <h1>CSS Reset</h1>
+                    <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit. Est natus perferendis hic autem enim.</p>
+                    <ul>
+                        <li>Item satu</li>
+                        <li>Item dua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3>Yang perlu diperhatikan</h3>
+        <ul>
+            <li>Setelah reset, <b>judul sama besar dengan paragraf</b> dan tidak tebal lagi.</li>
+            <li>Semua <b>jarak (margin dan padding) hilang</b>, jadi kotak hitam, judul, dan paragraf menempel.</li>
+            <li>List <b>kehilangan bullet</b>, dan <code>strong</code> tidak tebal lagi.</li>
+            <li>Teks lebih rapat karena <code>line-height: 1</code>.</li>
+            <li>Kotak ketiga menunjukkan alur kerja yang benar: <b>reset dulu, lalu atur ulang sesuai desain sendiri</b>.</li>
+        </ul>
+    </section>
+
+
+    <!-- ===== 3. ISI RESET MEYER ===== -->
+    <section class="materi">
+        <h2>3. Isi Reset Eric Meyer</h2>
+        <p>
+            Reset yang paling terkenal dari <b>meyerweb.com</b> (v2.0). Intinya seperti ini
+            (daftar elemennya aslinya jauh lebih panjang):
+        </p>
+
+<pre><code>html, body, div, span, h1, h2, h3, p, a, ul, li, table, ... {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body { line-height: 1; }
+ol, ul { list-style: none; }
+table { border-collapse: collapse; border-spacing: 0; }</code></pre>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Aturan</th><th>Efeknya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>margin: 0; padding: 0</code></td><td>Semua jarak bawaan dihapus</td></tr>
+                    <tr><td><code>border: 0</code></td><td>Border bawaan dihapus</td></tr>
+                    <tr><td><code>font: inherit</code></td><td>Font mewarisi dari parent, sehingga <b>judul tidak besar/tebal lagi</b> dan <code>strong</code>, <code>em</code> tidak tebal/miring</td></tr>
+                    <tr><td><code>vertical-align: baseline</code></td><td>Perataan vertikal dikembalikan ke normal</td></tr>
+                    <tr><td><code>line-height: 1</code> (di body)</td><td>Jarak antar baris dirapatkan</td></tr>
+                    <tr><td><code>list-style: none</code></td><td>Bullet dan nomor list dihapus</td></tr>
+                    <tr><td><code>border-collapse: collapse</code></td><td>Garis tabel menyatu, tanpa celah</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="catatan">
+            Bagian <code>display: block</code> untuk elemen HTML5 dan aturan <code>quotes</code>
+            di reset aslinya hanya untuk browser lama. Di browser modern tidak diperlukan lagi.
+        </p>
+    </section>
+
+
+    <!-- ===== 4. RESET DENGAN BINTANG ===== -->
+    <section class="materi">
+        <h2>4. Reset Singkat dengan Bintang (*)</h2>
+
+<pre><code>* {
+  margin: 0;
+  padding: 0;
+}</code></pre>
+
+        <p>
+            Cara paling singkat, tetapi hanya menghapus margin dan padding.
+            Ukuran judul, bullet list, dan <code>strong</code> yang tebal <b>masih bawaan browser</b>.
+        </p>
+        <p class="catatan">
+            <b>Soal "tidak disarankan karena berat":</b> itu anggapan lama. Di browser modern,
+            selektor <code>*</code> hampir tidak terasa pengaruhnya pada kecepatan.
+            Alasan yang lebih kuat: ia terlalu kasar karena mengenai <b>semua</b> elemen,
+            termasuk input dan tombol form, dan hanya mereset sebagian gaya bawaan.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. PILIHAN LAIN ===== -->
+    <section class="materi">
+        <h2>5. Reset, Normalize, dan Modern Reset</h2>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Pendekatan</th><th>Cara kerja</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>CSS Reset (Meyer)</td><td>Menghapus hampir semua gaya bawaan, dan kita atur ulang semuanya</td></tr>
+                    <tr><td>Normalize.css</td><td>Tidak menghapus, hanya menyamakan perbedaan antar browser dan menjaga gaya bawaan yang berguna</td></tr>
+                    <tr><td>Modern reset</td><td>Reset kecil dan sederhana, hanya yang benar-benar sering dibutuhkan</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Contoh modern reset sederhana</h3>
+<pre><code>* {
+  box-sizing: border-box;   /* hitungan ukuran lebih mudah */
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}</code></pre>
+    </section>
+
+
+    <!-- ===== 6. KESIMPULAN ===== -->
+    <section class="materi">
+        <h2>6. Kesimpulan</h2>
+        <ul>
+            <li>Browser punya gaya bawaan yang berbeda-beda, dan CSS Reset menyamakannya.</li>
+            <li>Reset ditaruh <b>paling atas</b> di file CSS, sebelum aturan lain.</li>
+            <li>Reset Meyer menghapus margin, padding, border, ukuran dan gaya font, bullet list, dan celah tabel.</li>
+            <li>Setelah reset, kita <b>wajib mengatur ulang</b> ukuran judul, jarak paragraf, dan bullet list sesuai desain.</li>
+            <li><code>* { margin: 0; padding: 0; }</code> lebih singkat tetapi hanya mereset sebagian.</li>
+            <li>Untuk project kecil, modern reset sederhana biasanya sudah cukup.</li>
+        </ul>
+    </section>
+
+</div>
+</body>
+</html>

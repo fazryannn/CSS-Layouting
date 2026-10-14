@@ -1,0 +1,220 @@
+/* ==========================================================
+   CSS RESET - CSS dasar
+   Bagian 1: pengaturan umum halaman
+   Bagian 2: komponen tampilan (judul, kartu materi, tabel, kode)
+   Bagian 3: contoh demo (sebelum dan sesudah reset)
+   ========================================================== */
+
+
+/* ---------- BAGIAN 1: PENGATURAN UMUM ---------- */
+
+/* Halaman catatan ini sengaja TIDAK memakai reset di seluruh halaman,
+   supaya contoh "tanpa reset" masih memperlihatkan gaya bawaan browser.
+   Reset hanya dipasang pada contoh lewat class .reset (lihat Bagian 3). */
+
+/* box-sizing: border-box -> width sudah termasuk padding dan border */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8eef3;
+    color: #2b2f33;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+/* max-width + margin auto -> konten di tengah, menyusut di layar kecil */
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #1e3a5f;
+}
+
+
+/* ---------- BAGIAN 2: KOMPONEN TAMPILAN ---------- */
+
+.judul {
+    background-color: #1e3a5f;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-bottom: 6px solid #0f766e;
+}
+
+.judul h1 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.judul p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* kartu putih untuk tiap materi */
+.materi {
+    background-color: #ffffff;
+    border-left: 6px solid #0f766e;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.materi h2 {
+    margin-top: 0;
+}
+
+.materi h3 {
+    color: #0f766e;
+}
+
+code {
+    background-color: #eef4f6;
+    color: #b45309;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.catatan {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+}
+
+/* tabel bisa digeser ke samping di layar kecil */
+.tabel-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+}
+
+/* nth-child: baris genap diberi warna selang-seling */
+tbody tr:nth-child(even) {
+    background-color: #eef4f6;
+}
+
+
+/* ---------- BAGIAN 3: CONTOH DEMO ---------- */
+
+.baris {
+    margin-bottom: 10px;
+}
+
+/* inline-block -> demo berjajar ke samping, tetap bisa diatur ukurannya */
+.demo {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 14px 14px 0;
+}
+
+.label {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+/* bingkai untuk tiap contoh. Padding mencegah margin anak
+   "bocor" keluar, jadi jarak bawaan h1 dan p tetap terlihat di dalam bingkai */
+.area-demo {
+    width: 280px;
+    padding: 12px;
+    background-color: #f8fafc;
+    border: 2px dashed #94a3b8;
+}
+
+/* kotak hitam dari latihan: aslinya aturan  div { ... }  yang mengenai
+   semua div. Dipindah ke class supaya div lain di halaman tidak ikut berubah. */
+.kotak-hitam {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+}
+
+
+/* --- Reset (versi terbatas untuk contoh) ---
+   Isinya sama dengan reset Eric Meyer, tetapi diberi awalan .reset
+   dan hanya untuk elemen yang dipakai di contoh. Kalau tidak diberi awalan,
+   reset akan mengubah seluruh halaman catatan ini. */
+.reset h1, .reset p, .reset ul, .reset li, .reset strong, .reset a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;              /* ukuran, ketebalan, dan miring ikut parent */
+    vertical-align: baseline;
+}
+
+/* setara dengan  body { line-height: 1; }  di reset aslinya */
+.reset {
+    line-height: 1;
+}
+
+/* setara dengan  ol, ul { list-style: none; } */
+.reset ul {
+    list-style: none;
+}
+
+
+/* --- Setelah reset: gaya sendiri ---
+   Ditulis SETELAH aturan .reset dengan specificity yang sama,
+   jadi yang belakangan menang dan mengatur ulang gaya yang tadi dihapus. */
+.rapi {
+    line-height: 1.5;
+}
+
+.rapi h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 12px 0 8px 0;
+}
+
+.rapi p {
+    margin-bottom: 8px;
+}
+
+.rapi strong {
+    font-weight: bold;
+}
+
+.rapi ul {
+    list-style: disc;
+    padding-left: 20px;
+}
