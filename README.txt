@@ -11,6 +11,8 @@
     Padding, border (style, width, color, per sisi), box-sizing (content-box dan border-box)
 6. Latihan-6
      CSS Reset (reset Eric Meyer, reset dengan *), mengatur ulang gaya setelah reset, Normalize dan modern reset
+7. Latihan-7
+    Float (left, right), clear, parent menciut dan cara memperbaikinya, layout tiga kolom
 
 1. Project-1
     Dibuat untuk mempraktikkan materi CSS layouting yang sudah dipelajari.

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float-CSS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>Float</h1>
+        <p>Catatan belajar CSS layouting: mengeluarkan elemen dari alur normal ke kiri atau kanan.</p>
+    </header>
+
+
+    <!-- ===== 1. APA ITU FLOAT ===== -->
+    <section class="materi">
+        <h2>1. Apa itu Float?</h2>
+        <p>
+            <code>float</code> adalah property CSS untuk mengatur posisi elemen.
+            Elemen dipaksa ke <b>sisi kiri atau kanan</b> parent-nya, dan elemen lain
+            (terutama teks) <b>mengalir mengelilinginya</b>.
+        </p>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Nilai</th><th>Artinya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>none</code></td><td>Tidak mengambang (default)</td></tr>
+                    <tr><td><code>left</code></td><td>Elemen ke sisi kiri, konten lain mengalir di sebelah kanannya</td></tr>
+                    <tr><td><code>right</code></td><td>Elemen ke sisi kanan, konten lain mengalir di sebelah kirinya</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Yang bisa dilakukan dengan float</h3>
+        <ul>
+            <li><b>Text wrapping</b>: teks mengelilingi gambar atau elemen lain</li>
+            <li><b>Image gallery</b>: serangkaian gambar atau kotak berjajar</li>
+            <li><b>Multi-column layout</b>: halaman dengan beberapa kolom</li>
+        </ul>
+
+        <p class="catatan">
+            <b>Sifat float:</b> elemen yang di-float keluar dari alur normal dan otomatis
+            berperilaku seperti <b>block</b> (width dan height berlaku). Margin <code>auto</code>
+            tidak bisa dipakai untuk menengahkannya.
+        </p>
+    </section>
+
+
+    <!-- ===== 2. TEXT WRAPPING ===== -->
+    <section class="materi">
+        <h2>2. Text Wrapping</h2>
+        <p>Gambar di-float, dan teks otomatis mengelilinginya.</p>
+
+        <div class="baris">
+            <div class="demo demo-lebar">
+                <span class="label">float: right</span>
+                <div class="bungkus">
+                    <img src="img/logo.png" alt="logo" class="logo-kanan">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At totam veniam eum consectetur. Sapiente laboriosam ratione saepe ex ipsum aspernatur porro culpa nobis quidem commodi aperiam, vero odit, cupiditate fugiat quos in hic consectetur eaque suscipit tenetur, quod quo repellat.</p>
+                </div>
+            </div>
+
+            <div class="demo demo-lebar">
+                <span class="label">float: left</span>
+                <div class="bungkus">
+                    <img src="img/logo.png" alt="logo" class="logo-kiri">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At totam veniam eum consectetur. Sapiente laboriosam ratione saepe ex ipsum aspernatur porro culpa nobis quidem commodi aperiam, vero odit, cupiditate fugiat quos in hic consectetur eaque suscipit tenetur, quod quo repellat.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="catatan">
+            Beri <code>margin</code> pada gambar supaya teks tidak menempel.
+            Pada <code>float: left</code>, margin kanan penting. Pada <code>float: right</code>, margin kiri.
+        </p>
+    </section>
+
+
+    <!-- ===== 3. KOTAK BERJAJAR ===== -->
+    <section class="materi">
+        <h2>3. Kotak Berjajar (Galeri)</h2>
+        <p>
+            Kotak yang di-float akan berjajar ke samping, dan turun ke baris baru kalau tidak muat.
+            Perhatikan <b>urutan angkanya</b>.
+        </p>
+
+        <h3>float: right</h3>
+        <p>Kotak 1 ada di paling kanan, lalu berurutan ke kiri.</p>
+        <div class="area area-fix">
+            <div class="kotak kanan">1</div>
+            <div class="kotak kanan">2</div>
+            <div class="kotak kanan">3</div>
+            <div class="kotak kanan">4</div>
+            <div class="kotak kanan">5</div>
+            <div class="kotak kanan">6</div>
+            <div class="kotak kanan">7</div>
+            <div class="kotak kanan">8</div>
+            <div class="kotak kanan">9</div>
+            <div class="kotak kanan">10</div>
+        </div>
+
+        <h3>float: left</h3>
+        <p>Kotak 1 ada di paling kiri, urutannya terbaca normal.</p>
+        <div class="area area-fix">
+            <div class="kotak kiri">1</div>
+            <div class="kotak kiri">2</div>
+            <div class="kotak kiri">3</div>
+            <div class="kotak kiri">4</div>
+            <div class="kotak kiri">5</div>
+            <div class="kotak kiri">6</div>
+            <div class="kotak kiri">7</div>
+            <div class="kotak kiri">8</div>
+            <div class="kotak kiri">9</div>
+            <div class="kotak kiri">10</div>
+        </div>
+
+        <p class="catatan">
+            Area di atas memakai <code>overflow: auto</code> agar tingginya mengikuti kotak.
+            Alasannya dijelaskan di bagian berikut.
+        </p>
+    </section>
+
+
+    <!-- ===== 4. MASALAH: PARENT MENCIUT ===== -->
+    <section class="materi">
+        <h2>4. Masalah: Parent Menciut</h2>
+        <p>
+            Elemen yang di-float keluar dari alur normal, jadi parent menganggapnya <b>tidak ada</b>.
+            Kalau semua isi parent adalah float, tinggi parent jadi <b>nol</b> dan kotak
+            melewati batas parent (hanya terlihat garis border tipis).
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">tanpa perbaikan</span>
+                <div class="parent masalah">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                </div>
+            </div>
+            <div class="demo">
+                <span class="label">overflow: auto</span>
+                <div class="parent fix-overflow">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                </div>
+            </div>
+            <div class="demo">
+                <span class="label">display: flow-root</span>
+                <div class="parent fix-flow">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Cara memperbaiki</h3>
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Cara</th><th>Keterangan</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>overflow: auto</code> (atau <code>hidden</code>) pada parent</td><td>Paling sederhana. Hati-hati: <code>hidden</code> memotong isi yang keluar</td></tr>
+                    <tr><td><code>display: flow-root</code> pada parent</td><td>Cara modern dan paling bersih, khusus dibuat untuk masalah ini</td></tr>
+                    <tr><td>Clearfix</td><td>Cara klasik: elemen kosong di akhir parent yang diberi <code>clear: both</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Clearfix klasik</h3>
+<pre><code>.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}</code></pre>
+
+        <p class="catatan">
+            Di kode latihan awal, masalah ini "diakali" dengan <code>margin: 200px auto</code> supaya
+            ada ruang untuk kotak yang keluar. Itu hanya menutupi gejalanya, bukan memperbaikinya.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. CLEAR ===== -->
+    <section class="materi">
+        <h2>5. Clear</h2>
+        <p>
+            <code>clear</code> membuat elemen <b>menolak berdampingan</b> dengan float,
+            sehingga turun ke bawahnya. Nilainya: <code>left</code>, <code>right</code>,
+            <code>both</code>, <code>none</code>.
+        </p>
+
+        <div class="baris">
+            <div class="demo demo-sedang">
+                <span class="label">tanpa clear</span>
+                <div class="area area-fix">
+                    <div class="kotak-clear">Float</div>
+                    <p>Paragraf ini mengalir di sebelah kotak float, karena float tidak menghalangi teks.</p>
+                </div>
+            </div>
+            <div class="demo demo-sedang">
+                <span class="label">clear: both</span>
+                <div class="area area-fix">
+                    <div class="kotak-clear">Float</div>
+                    <p class="bersih">Paragraf ini turun ke bawah kotak float, karena memakai clear: both.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 6. LAYOUT TIGA KOLOM ===== -->
+    <section class="materi">
+        <h2>6. Multi-Column Layout</h2>
+        <p>
+            Tiga kolom dibuat dengan float: left pada semuanya. Lebar kolom dibuat
+            <b>persen</b> dan totalnya 100% agar pas di parent.
+        </p>
+
+        <div class="kolom-wrap">
+            <div class="kolom k1">Kolom 1 (20%)</div>
+            <div class="kolom k2">Kolom 2 (60%)</div>
+            <div class="kolom k3">Kolom 3 (20%)</div>
+        </div>
+
+        <p class="catatan">
+            Kalau total lebar kolom melebihi lebar parent (misalnya karena padding atau border
+            ikut menambah ukuran pada <code>content-box</code>), kolom terakhir akan <b>turun ke baris bawah</b>.
+            Itu sebabnya <code>box-sizing: border-box</code> sangat membantu.
+        </p>
+    </section>
+
+
+    <!-- ===== 7. FLOAT ATAU FLEX/GRID ===== -->
+    <section class="materi">
+        <h2>7. Float, Flex, atau Grid?</h2>
+        <p>
+            Untuk layout halaman, cara modern adalah <code>display: flex</code> dan
+            <code>display: grid</code>. Float aslinya dibuat untuk <b>teks yang mengelilingi gambar</b>,
+            dan itu tetap kegunaan terbaiknya. Float untuk kolom dan galeri masih sering ditemukan
+            di kode lama, jadi penting dipahami.
+        </p>
+    </section>
+
+
+    <!-- ===== 8. KESIMPULAN ===== -->
+    <section class="materi">
+        <h2>8. Kesimpulan</h2>
+        <ul>
+            <li><code>float</code> punya nilai <code>none</code>, <code>left</code>, <code>right</code>.</li>
+            <li>Elemen float keluar dari alur normal dan teks mengalir mengelilinginya.</li>
+            <li>Float right membalik urutan: elemen pertama berada paling kanan.</li>
+            <li>Parent yang isinya semua float akan menciut. Perbaiki dengan <code>overflow: auto</code>, <code>display: flow-root</code>, atau clearfix.</li>
+            <li><code>clear</code> membuat elemen turun di bawah float.</li>
+            <li>Float cocok untuk text wrapping. Layout modern memakai flex dan grid.</li>
+        </ul>
+    </section>
+
+</div>
+</body>
+</html>
