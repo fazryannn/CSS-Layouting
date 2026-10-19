@@ -1,0 +1,236 @@
+/* ==========================================================
+   CLEARFIX - CSS dasar
+   Bagian 1: pengaturan umum halaman
+   Bagian 2: komponen tampilan (judul, kartu materi, tabel, kode)
+   Bagian 3: contoh demo untuk tiap materi
+   ========================================================== */
+
+
+/* ---------- BAGIAN 1: PENGATURAN UMUM ---------- */
+
+/* border-box -> width sudah termasuk padding dan border */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8eef3;
+    color: #2b2f33;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+/* max-width + margin auto -> konten di tengah, menyusut di layar kecil */
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #1e3a5f;
+}
+
+
+/* ---------- BAGIAN 2: KOMPONEN TAMPILAN ---------- */
+
+.judul {
+    background-color: #1e3a5f;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-bottom: 6px solid #0f766e;
+}
+
+.judul h1 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.judul p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* kartu putih untuk tiap materi */
+.materi {
+    background-color: #ffffff;
+    border-left: 6px solid #0f766e;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.materi h2 {
+    margin-top: 0;
+}
+
+.materi h3 {
+    color: #0f766e;
+}
+
+code {
+    background-color: #eef4f6;
+    color: #b45309;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.catatan {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+}
+
+/* tabel bisa digeser ke samping di layar kecil */
+.tabel-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+}
+
+/* nth-child: baris genap diberi warna selang-seling */
+tbody tr:nth-child(even) {
+    background-color: #eef4f6;
+}
+
+
+/* ---------- BAGIAN 3: CONTOH DEMO ---------- */
+
+.baris {
+    margin-bottom: 10px;
+}
+
+/* inline-block -> demo berjajar ke samping */
+.demo {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 14px 14px 0;
+}
+
+.label {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+
+/* --- Parent dan kotak yang di-float ---
+   Semua demo memakai parent dan tiga kotak yang sama.
+   Hanya class tambahan di parent yang membedakan hasilnya. */
+.parent {
+    width: 200px;
+    background-color: #fdf2f8;      /* kalau parent menciut, warna ini tidak terlihat */
+    border: 2px solid #db2777;
+}
+
+.mini {
+    float: left;                    /* keluar dari alur normal */
+    width: 50px;
+    height: 50px;
+    background-color: #db2777;
+    margin: 2px;
+}
+
+/* .masalah sengaja tidak diberi aturan apa pun.
+   Inilah kondisi tanpa perbaikan: parent menciut. */
+
+
+/* --- Solusi 1: elemen kosong --- */
+.clear {
+    clear: both;        /* menolak berdampingan dengan float, jadi turun ke bawahnya */
+}
+
+
+/* --- Solusi 2: overflow --- */
+.fix-overflow {
+    overflow: auto;
+}
+
+
+/* --- Solusi 3: clearfix ---
+   ::after membuat elemen bayangan di akhir isi parent. */
+.clearfix::after {
+    content: "";            /* wajib, tanpa ini elemen tidak dibuat */
+    display: block;         /* supaya bisa di-clear */
+    clear: both;            /* turun di bawah semua float, parent ikut memanjang */
+}
+
+
+/* --- Solusi 4: flow-root --- */
+.fix-flow {
+    display: flow-root;
+}
+
+
+/* --- Latihan: layout dua kolom --- */
+
+/* parent berlatar abu-abu agar mudah terlihat membungkus atau tidak */
+.layout {
+    max-width: 600px;
+    background-color: #e2e8f0;
+    border: 2px solid #64748b;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.konten, .sidebar {
+    padding: 10px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* tinggi dibuat tetap agar ukuran margin pada .tanpa mudah dihitung */
+.konten {
+    float: left;
+    width: 65%;
+    height: 100px;
+    background-color: salmon;
+}
+
+.sidebar {
+    float: right;
+    width: 32%;
+    height: 80px;
+    background-color: #0f766e;
+}
+
+/* tanpa clearfix: parent menciut, jadi diberi margin besar
+   supaya tidak menimpa konten di bawahnya. Ini hanya akal-akalan
+   untuk demo, bukan perbaikan sebenarnya. */
+.tanpa {
+    margin-bottom: 115px;
+}

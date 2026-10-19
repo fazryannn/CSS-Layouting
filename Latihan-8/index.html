@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearfix CSS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>Clearfix</h1>
+        <p>Catatan belajar CSS layouting: cara membuat parent mau membungkus elemen yang di-float.</p>
+    </header>
+
+
+    <!-- ===== 1. MASALAHNYA ===== -->
+    <section class="materi">
+        <h2>1. Masalahnya Apa?</h2>
+        <p>
+            Bayangkan parent sebagai <b>pagar</b> dan elemen di dalamnya sebagai <b>hewan ternak</b>.
+            Pagar otomatis menyesuaikan tingginya dengan hewan yang ada di dalam.
+        </p>
+        <p>
+            Elemen yang diberi <code>float</code> seperti hewan yang <b>melompat keluar</b> dari alur normal.
+            Pagar menganggap isinya kosong, jadi tingginya <b>menciut jadi nol</b> dan hewannya
+            terlihat berdiri di luar pagar.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">tanpa perbaikan</span>
+                <div class="parent masalah">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                </div>
+            </div>
+        </div>
+
+<pre><code>.parent { border: 2px solid red; }
+.mini   { float: left; width: 50px; height: 50px; }</code></pre>
+
+        <p class="catatan">
+            <b>Yang terlihat:</b> parent hanya berupa garis tipis (dua border yang menempel),
+            padahal tiga kotak ada di dalamnya. Latar belakang parent juga tidak terlihat.
+            Inilah masalah yang diselesaikan oleh <b>clearfix</b>.
+        </p>
+    </section>
+
+
+    <!-- ===== 2. SOLUSI 1: ELEMEN KOSONG ===== -->
+    <section class="materi">
+        <h2>2. Solusi 1: Elemen Kosong (Cara Lama)</h2>
+        <p>
+            Tambahkan elemen kosong di akhir parent dan beri <code>clear: both</code>.
+            Elemen itu menolak berdampingan dengan float, jadi turun ke bawahnya
+            dan parent ikut memanjang sampai ke situ.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">elemen kosong + clear</span>
+                <div class="parent">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+<pre><code>&lt;div class="parent"&gt;
+  &lt;div class="mini"&gt;&lt;/div&gt;
+  &lt;div class="mini"&gt;&lt;/div&gt;
+  &lt;div class="clear"&gt;&lt;/div&gt;   &lt;!-- elemen kosong --&gt;
+&lt;/div&gt;
+
+.clear { clear: both; }</code></pre>
+
+        <p><b>Kekurangan:</b> menambah elemen HTML yang tidak punya arti, hanya demi tampilan.</p>
+    </section>
+
+
+    <!-- ===== 3. SOLUSI 2: OVERFLOW ===== -->
+    <section class="materi">
+        <h2>3. Solusi 2: Overflow pada Parent</h2>
+        <p>
+            Beri <code>overflow: auto</code> atau <code>overflow: hidden</code> pada parent.
+            Parent yang punya aturan overflow otomatis membungkus isinya, termasuk float.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">overflow: auto</span>
+                <div class="parent fix-overflow">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                </div>
+            </div>
+        </div>
+
+<pre><code>.parent { overflow: auto; }</code></pre>
+
+        <p>
+            <b>Kelebihan:</b> hanya satu baris CSS.<br>
+            <b>Hati-hati:</b> <code>hidden</code> memotong isi yang keluar dari parent,
+            dan <code>auto</code> bisa memunculkan scrollbar yang tidak diinginkan.
+        </p>
+    </section>
+
+
+    <!-- ===== 4. SOLUSI 3: CLEARFIX ===== -->
+    <section class="materi">
+        <h2>4. Solusi 3: Clearfix (Paling Populer)</h2>
+        <p>
+            Ini versi rapi dari cara elemen kosong: elemen kosongnya dibuat lewat CSS
+            memakai <code>::after</code>, jadi HTML tetap bersih. Cukup tambahkan class
+            <code>clearfix</code> ke parent.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">class clearfix</span>
+                <div class="parent clearfix">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                </div>
+            </div>
+        </div>
+
+<pre><code>.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}</code></pre>
+
+<pre><code>&lt;div class="parent clearfix"&gt;
+  ...elemen yang di-float...
+&lt;/div&gt;</code></pre>
+
+        <h3>Arti tiap baris</h3>
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Baris</th><th>Fungsinya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>::after</code></td><td>Membuat elemen bayangan di <b>akhir</b> isi parent (tidak ada di HTML)</td></tr>
+                    <tr><td><code>content: ""</code></td><td>Wajib ada. Tanpa ini elemen bayangan tidak dibuat. Isinya kosong</td></tr>
+                    <tr><td><code>display: block</code></td><td>Menjadikannya elemen blok supaya bisa di-clear</td></tr>
+                    <tr><td><code>clear: both</code></td><td>Turun di bawah semua float, sehingga parent ikut memanjang sampai ke sini</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="catatan">
+            Nama class <code>clearfix</code> bebas, tetapi ini nama yang paling umum.
+            Sekali ditulis di CSS, class ini bisa dipakai di banyak parent.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. SOLUSI 4: FLOW-ROOT ===== -->
+    <section class="materi">
+        <h2>5. Solusi 4: display: flow-root (Cara Modern)</h2>
+        <p>
+            Property yang dibuat khusus untuk masalah ini. Cukup satu baris dan tidak
+            punya efek samping seperti overflow.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">display: flow-root</span>
+                <div class="parent fix-flow">
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                    <div class="mini"></div>
+                </div>
+            </div>
+        </div>
+
+<pre><code>.parent { display: flow-root; }</code></pre>
+    </section>
+
+
+    <!-- ===== 6. PERBANDINGAN ===== -->
+    <section class="materi">
+        <h2>6. Perbandingan Cara</h2>
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Cara</th><th>Kelebihan</th><th>Kekurangan</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Elemen kosong + <code>clear</code></td><td>Mudah dipahami</td><td>Menambah HTML tanpa arti</td></tr>
+                    <tr><td><code>overflow</code></td><td>Satu baris</td><td>Bisa memotong isi atau memunculkan scrollbar</td></tr>
+                    <tr><td>Clearfix <code>::after</code></td><td>HTML bersih, sangat umum di kode lama</td><td>Tiga baris dan perlu menambah class</td></tr>
+                    <tr><td><code>display: flow-root</code></td><td>Satu baris, tanpa efek samping</td><td>Tidak jalan di browser yang sangat lama</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="catatan">
+            <b>Rekomendasi:</b> pakai <code>display: flow-root</code> untuk project baru.
+            Kenali clearfix karena masih sangat sering muncul di kode lama dan tutorial.
+        </p>
+    </section>
+
+
+    <!-- ===== 7. LATIHAN: LAYOUT DUA KOLOM ===== -->
+    <section class="materi">
+        <h2>7. Latihan: Layout Dua Kolom</h2>
+        <p>
+            Kolom konten di-float ke kiri dan sidebar di-float ke kanan.
+            Latar abu-abu adalah parent-nya.
+        </p>
+
+        <h3>Tanpa clearfix</h3>
+        <div class="layout tanpa">
+            <div class="konten">Konten utama</div>
+            <div class="sidebar">Sidebar</div>
+        </div>
+
+        <h3>Dengan clearfix</h3>
+        <div class="layout clearfix">
+            <div class="konten">Konten utama</div>
+            <div class="sidebar">Sidebar</div>
+        </div>
+
+        <p>
+            Pada contoh pertama, latar abu-abu parent hilang dan hanya berupa garis.
+            Pada contoh kedua, parent membungkus kedua kolom dengan benar.
+        </p>
+    </section>
+
+
+    <!-- ===== 8. KESALAHAN UMUM ===== -->
+    <section class="materi">
+        <h2>8. Kesalahan Umum</h2>
+        <ul>
+            <li><b>Lupa <code>content: ""</code></b>. Tanpa ini clearfix tidak bekerja sama sekali.</li>
+            <li><b>Memasang clearfix di elemen yang di-float</b>, bukan di parent-nya. Class harus ada di <b>parent</b>.</li>
+            <li><b>Memakai <code>overflow: hidden</code></b> lalu bingung kenapa ada konten yang terpotong.</li>
+            <li><b>Mengakali dengan margin besar</b> supaya tidak tertimpa. Itu hanya menutupi gejalanya, bukan memperbaikinya.</li>
+        </ul>
+    </section>
+
+
+    <!-- ===== 9. KESIMPULAN ===== -->
+    <section class="materi">
+        <h2>9. Kesimpulan</h2>
+        <ul>
+            <li>Parent yang semua isinya float akan menciut jadi tinggi nol.</li>
+            <li>Penyebabnya: float keluar dari alur normal, jadi parent menganggap isinya kosong.</li>
+            <li>Ada empat cara memperbaikinya: elemen kosong, <code>overflow</code>, clearfix, dan <code>flow-root</code>.</li>
+            <li>Clearfix memakai <code>::after</code> dengan <code>content: ""</code>, <code>display: block</code>, dan <code>clear: both</code>.</li>
+            <li>Untuk project baru, <code>display: flow-root</code> adalah pilihan paling bersih.</li>
+        </ul>
+    </section>
+
+</div>
+</body>
+</html>

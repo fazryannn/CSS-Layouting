@@ -13,6 +13,8 @@
      CSS Reset (reset Eric Meyer, reset dengan *), mengatur ulang gaya setelah reset, Normalize dan modern reset
 7. Latihan-7
     Float (left, right), clear, parent menciut dan cara memperbaikinya, layout tiga kolom
+8. Latihan-8
+     Clearfix (parent menciut, elemen kosong, overflow, ::after, flow-root)
 
 1. Project-1
     Dibuat untuk mempraktikkan materi CSS layouting yang sudah dipelajari.
