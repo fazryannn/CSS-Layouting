@@ -1,9 +1,9 @@
 /* ==========================================================
-   FAZ-GARAGE - Halaman Artikel
+   FAZ-GARAGE - Halaman Artikel dengan Sidebar
    1. Pengaturan umum   5. Hero (foto sampul)
-   2. Reset ringan      6. Isi artikel
-   3. Container         7. Footer
-   4. Header dan menu
+   2. Reset ringan      6. Isi halaman (artikel + sidebar)
+   3. Container         7. Clearfix
+   4. Header dan menu   8. Footer
    ========================================================== */
 
 
@@ -18,11 +18,12 @@ body {
     font-family: 'Segoe UI', Arial, Geneva, Verdana, sans-serif;
     font-size: 1.0625rem;       /* 17px */
     line-height: 1.7;           /* tinggi baris */
-    background-image: url(img/background.png);
     color: #111827;             /* teks: hampir hitam */
+    background-color: #f4f5f7;  /* cadangan kalau gambar background belum termuat */
+    background-image: url(img/background.png);
 }
 
-/* Versi shorthand (hasilnya sama):
+/* Versi shorthand font (hasilnya sama):
    body {
        font: 1.0625rem/1.7 "Segoe UI", Roboto, Arial, sans-serif;
    }
@@ -42,7 +43,7 @@ ul, li {
    max-width (bukan width) -> di layar kecil menyusut, tidak melebar keluar.
    margin auto -> berada di tengah halaman. */
 .container {
-    max-width: 800px;
+    max-width: 960px;
     margin: auto;
     background-color: #ffffff;
 }
@@ -85,7 +86,18 @@ ul, li {
 }
 
 
-/* ---------- 6. ISI ARTIKEL ---------- */
+/* ---------- 6. ISI HALAMAN (ARTIKEL + SIDEBAR) ----------
+   Dua kolom dibuat dengan float:
+   artikel (600px) di kiri + sidebar (300px) di kanan = 900px.
+   Sisa 60px dari container 960px menjadi jarak di antara keduanya.
+   Pembungkus .content diberi class clearfix (lihat bagian 7). */
+
+/* --- Kolom artikel --- */
+.main {
+    float: left;
+    width: 600px;
+    padding: 20px;
+}
 
 /* judul dan paragraf diberi jarak dalam agar tidak menempel ke tepi */
 h1, h2, h3, p {
@@ -107,8 +119,43 @@ ul.item {
     padding-left: 55px;
 }
 
+/* --- Kolom sidebar --- */
+.sidebar {
+    float: right;
+    width: 300px;
+    padding: 20px;
+}
 
-/* ---------- 7. FOOTER ---------- */
+/* foto penulis di-float ke kiri, jadi teks mengalir di sebelah kanannya.
+   Jarak ke teks memakai margin, BUKAN padding: pada border-box, padding
+   ikut mengurangi lebar sehingga foto 70x70 akan terlihat gepeng. */
+.sidebar img {
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+    object-fit: cover;      /* foto dipotong rapi, tidak melar */
+}
+
+.sidebar p {
+    font-size: 12px;
+}
+
+
+/* ---------- 7. CLEARFIX ----------
+   Parent yang semua isinya di-float akan menciut jadi tinggi nol.
+   ::after membuat elemen bayangan di akhir parent yang menolak
+   berdampingan dengan float (clear: both), sehingga parent ikut memanjang
+   dan footer berada di bawah kedua kolom.
+   Dipasang di HTML: <div class="content clearfix"> */
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+
+/* ---------- 8. FOOTER ---------- */
 
 .footer {
     background-color: #1f2937;      /* abu kebiruan gelap */
