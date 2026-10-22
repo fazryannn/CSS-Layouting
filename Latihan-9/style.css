@@ -1,0 +1,312 @@
+/* ==========================================================
+   POSITION - CSS dasar
+   Bagian 1: pengaturan umum halaman
+   Bagian 2: komponen tampilan (judul, kartu materi, tabel, kode)
+   Bagian 3: contoh demo untuk tiap materi
+   ========================================================== */
+
+
+/* ---------- BAGIAN 1: PENGATURAN UMUM ---------- */
+
+/* border-box -> width sudah termasuk padding dan border */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8eef3;
+    color: #2b2f33;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+/* max-width + margin auto -> konten di tengah, menyusut di layar kecil */
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #1e3a5f;
+}
+
+
+/* ---------- BAGIAN 2: KOMPONEN TAMPILAN ---------- */
+
+.judul {
+    background-color: #1e3a5f;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-bottom: 6px solid #0f766e;
+}
+
+.judul h1 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.judul p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* kartu putih untuk tiap materi */
+.materi {
+    background-color: #ffffff;
+    border-left: 6px solid #0f766e;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.materi h2 {
+    margin-top: 0;
+}
+
+.materi h3 {
+    color: #0f766e;
+}
+
+code {
+    background-color: #eef4f6;
+    color: #b45309;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.catatan {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+}
+
+/* tabel bisa digeser ke samping di layar kecil */
+.tabel-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+}
+
+/* nth-child: baris genap diberi warna selang-seling */
+tbody tr:nth-child(even) {
+    background-color: #eef4f6;
+}
+
+
+/* ---------- BAGIAN 3: CONTOH DEMO ---------- */
+
+.baris {
+    margin-bottom: 10px;
+}
+
+/* inline-block -> demo berjajar ke samping */
+.demo {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 14px 14px 0;
+}
+
+.label {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+
+/* --- Demo 1 sampai 3: static dan relative ---
+   Tiga kotak dari latihan (aslinya 200x200, diperkecil agar ringkas).
+   Aslinya ditulis  div { width: 200px; height: 200px }  yang mengenai
+   semua div. Di sini dipakai class supaya div lain tidak ikut berubah. */
+.area {
+    width: 150px;
+    padding: 8px;
+    background-color: #f1f5f9;
+    border: 2px solid #94a3b8;
+}
+
+.kotak {
+    width: 70px;
+    height: 70px;
+}
+
+.merah { background-color: red; }
+.emas  { background-color: gold; }
+.ungu  { background-color: violet; }
+
+/* static: top dan left DIABAIKAN, kotak tidak bergeser */
+.s-dua {
+    position: static;
+    top: 50px;
+    left: 30px;
+}
+
+/* relative: bergeser dari posisi semula, ruang aslinya tetap ada.
+   Karena ruang kuning masih terpakai, kotak ungu tidak naik. */
+.r-dua {
+    position: relative;
+    left: 30px;      /* geser ke kanan 30px */
+    top: 50px;       /* geser ke bawah 50px */
+}
+
+/* top: 0 dan left: 0 -> tidak ada perubahan posisi */
+.r-nol {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+
+/* --- Demo 4: absolute --- */
+
+/* parent diberi position: relative (tanpa digeser) sebagai acuan
+   untuk anak yang absolute */
+.induk-abs {
+    position: relative;
+    width: 260px;
+    height: 150px;
+    background-color: #e2e8f0;
+    border: 2px solid #94a3b8;
+}
+
+.blok {
+    width: 110px;
+    height: 36px;
+    padding: 4px 8px;
+    background-color: #0f766e;
+    color: #ffffff;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+/* absolute: ruang aslinya hilang (C langsung menempel di bawah A).
+   Posisinya dihitung dari sudut .induk-abs */
+.ab-kanan {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 50px;
+    background-color: #db2777;
+}
+
+.ab-kiri {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 50px;
+    background-color: #f59e0b;
+    color: #1e3a5f;
+}
+
+
+/* --- Demo 5: fixed --- */
+
+/* mengacu ke layar, jadi tetap di pojok kanan bawah saat scroll */
+.tombol-atas {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;            /* di atas konten lain */
+    padding: 10px 16px;
+    background-color: #0f766e;
+    color: #ffffff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.tombol-atas:hover {
+    background-color: #1e3a5f;
+}
+
+
+/* --- Demo 6: sticky --- */
+
+/* kotak yang bisa di-scroll: sticky bekerja di dalam area scroll ini */
+.kotak-scroll {
+    width: 280px;
+    height: 160px;
+    overflow-y: auto;
+    border: 2px solid #94a3b8;
+}
+
+.kotak-scroll p {
+    margin: 0;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+/* menempel di tepi atas saat di-scroll. Wajib ada top */
+.judul-sticky {
+    position: sticky;
+    top: 0;
+    padding: 6px 10px;
+    background-color: #1e3a5f;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+
+/* --- Demo 7: z-index --- */
+
+.induk-z {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    background-color: #f1f5f9;
+    border: 2px solid #94a3b8;
+}
+
+/* tiga kotak absolute yang saling menimpa */
+.z {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+}
+
+.z-a { left: 10px; top: 10px; }
+.z-b { left: 40px; top: 30px; }
+.z-c { left: 70px; top: 50px; }
+
+.merah-z { background-color: red; }
+.emas-z  { background-color: gold; }
+.ungu-z  { background-color: violet; }
+
+/* tanpa z-index, yang ditulis belakangan di HTML berada paling atas.
+   z-index yang lebih besar mengalahkan urutan itu. */
+.z-tinggi {
+    z-index: 3;
+}

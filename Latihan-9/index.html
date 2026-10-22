@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Position</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul" id="atas">
+        <h1>Position</h1>
+        <p>Catatan belajar CSS layouting: mengatur posisi elemen dengan position, top, right, bottom, left, dan z-index.</p>
+    </header>
+
+
+    <!-- ===== 1. APA ITU POSITION ===== -->
+    <section class="materi">
+        <h2>1. Apa itu Position?</h2>
+        <p>
+            <code>position</code> menentukan <b>cara sebuah elemen diposisikan</b> di halaman.
+            Setelah diberi position selain <code>static</code>, elemen bisa digeser
+            memakai <code>top</code>, <code>right</code>, <code>bottom</code>, dan <code>left</code>.
+        </p>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Nilai</th><th>Posisinya mengacu ke</th><th>Ruang aslinya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>static</code></td><td>Alur normal (default)</td><td>Tetap</td></tr>
+                    <tr><td><code>relative</code></td><td>Posisi semula elemen itu sendiri</td><td>Tetap ada</td></tr>
+                    <tr><td><code>absolute</code></td><td>Parent terdekat yang punya position</td><td>Hilang</td></tr>
+                    <tr><td><code>fixed</code></td><td>Layar (viewport)</td><td>Hilang</td></tr>
+                    <tr><td><code>sticky</code></td><td>Relative dulu, lalu menempel saat di-scroll</td><td>Tetap ada</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="catatan">
+            <b>Ingat:</b> <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>,
+            dan <code>z-index</code> <b>hanya berfungsi</b> pada elemen yang position-nya bukan static.
+        </p>
+    </section>
+
+
+    <!-- ===== 2. STATIC ===== -->
+    <section class="materi">
+        <h2>2. Static</h2>
+        <p>
+            Nilai default semua elemen kalau position tidak ditulis.
+            Elemen mengikuti alur normal, dan <code>top</code>, <code>left</code>, dst. <b>diabaikan</b>.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">position: static; top: 50px; left: 30px</span>
+                <div class="area">
+                    <div class="kotak merah"></div>
+                    <div class="kotak emas s-dua"></div>
+                    <div class="kotak ungu"></div>
+                </div>
+            </div>
+        </div>
+        <p>Kotak kuning tidak bergeser, walaupun diberi <code>top</code> dan <code>left</code>.</p>
+    </section>
+
+
+    <!-- ===== 3. RELATIVE ===== -->
+    <section class="materi">
+        <h2>3. Relative</h2>
+        <ul>
+            <li>Elemen bergerak <b>relatif terhadap posisi semulanya</b>.</li>
+            <li><b>Ruang aslinya tetap ada</b>, jadi elemen lain tidak ikut bergeser.</li>
+            <li><code>top: 0</code> dan <code>left: 0</code> berarti tidak berubah posisi.</li>
+        </ul>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">top: 50px; left: 30px</span>
+                <div class="area">
+                    <div class="kotak merah"></div>
+                    <div class="kotak emas r-dua"></div>
+                    <div class="kotak ungu"></div>
+                </div>
+            </div>
+            <div class="demo">
+                <span class="label">top: 0; left: 0</span>
+                <div class="area">
+                    <div class="kotak merah"></div>
+                    <div class="kotak emas r-nol"></div>
+                    <div class="kotak ungu"></div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            Pada contoh kiri, kotak kuning turun 50px dan geser 30px ke kanan, sehingga
+            menutupi sebagian kotak ungu. Kotak ungu <b>tidak naik</b> mengisi tempat kuning,
+            karena ruang asal kuning masih dianggap terpakai.
+        </p>
+
+        <h3>Positif dan negatif</h3>
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Penulisan</th><th>Arah gerak</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>top: 20px</code></td><td>Turun 20px</td></tr>
+                    <tr><td><code>bottom: 20px</code></td><td>Naik 20px</td></tr>
+                    <tr><td><code>left: 20px</code></td><td>Geser ke kanan 20px</td></tr>
+                    <tr><td><code>right: 20px</code></td><td>Geser ke kiri 20px</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Nilai tersebut mendorong elemen <b>menjauhi sisi</b> yang disebut. Nilai negatif membalik arahnya.</p>
+    </section>
+
+
+    <!-- ===== 4. ABSOLUTE ===== -->
+    <section class="materi">
+        <h2>4. Absolute</h2>
+        <ul>
+            <li>Elemen <b>keluar dari alur normal</b>, ruang aslinya hilang.</li>
+            <li>Posisinya mengacu ke <b>parent terdekat yang punya position</b> (bukan static).</li>
+            <li>Kalau tidak ada parent seperti itu, mengacu ke halaman (elemen paling luar).</li>
+        </ul>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">parent: relative, anak: absolute</span>
+                <div class="induk-abs">
+                    <div class="blok">A (normal)</div>
+                    <div class="blok ab-kanan">B</div>
+                    <div class="blok">C (normal)</div>
+                    <div class="blok ab-kiri">D</div>
+                </div>
+            </div>
+        </div>
+
+<pre><code>.induk { position: relative; }          /* jadi acuan */
+.badge { position: absolute;
+         top: 8px; right: 8px; }        /* 8px dari sudut kanan atas induk */</code></pre>
+
+        <p>
+            Kotak B dan D absolute, jadi tidak memakan ruang: C langsung menempel di bawah A.
+            B menempel di sudut kanan atas induk dan D di sudut kiri bawah.
+        </p>
+
+        <p class="catatan">
+            <b>Pola yang paling sering dipakai:</b> beri parent <code>position: relative</code>
+            (tanpa digeser), lalu anaknya <code>position: absolute</code>.
+            Cocok untuk badge, label di atas gambar, atau tombol tutup di pojok kartu.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. FIXED ===== -->
+    <section class="materi">
+        <h2>5. Fixed</h2>
+        <ul>
+            <li>Mengacu ke <b>layar (viewport)</b>, bukan ke parent.</li>
+            <li>Posisinya <b>tidak berubah saat halaman di-scroll</b>.</li>
+            <li>Ruang aslinya hilang, seperti absolute.</li>
+        </ul>
+
+<pre><code>.tombol-atas {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}</code></pre>
+
+        <p>
+            Contohnya ada di halaman ini: tombol <b>"Ke atas"</b> di pojok kanan bawah.
+            Scroll ke mana pun, tombolnya tetap di tempat. Cocok untuk navbar yang selalu terlihat
+            dan tombol kembali ke atas.
+        </p>
+    </section>
+
+
+    <!-- ===== 6. STICKY ===== -->
+    <section class="materi">
+        <h2>6. Sticky</h2>
+        <p>
+            Gabungan relative dan fixed: elemen berada di tempat normalnya, lalu
+            <b>menempel</b> di posisi yang ditentukan saat di-scroll melewatinya.
+            Wajib memakai <code>top</code> (atau sisi lain) agar tahu kapan menempel.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">scroll di dalam kotak ini</span>
+                <div class="kotak-scroll">
+                    <div class="judul-sticky">Judul ini menempel di atas</div>
+                    <p>Baris isi 1. Gulir ke bawah untuk melihat judul tetap menempel.</p>
+                    <p>Baris isi 2.</p>
+                    <p>Baris isi 3.</p>
+                    <p>Baris isi 4.</p>
+                    <p>Baris isi 5.</p>
+                    <p>Baris isi 6.</p>
+                    <p>Baris isi 7.</p>
+                    <p>Baris isi 8.</p>
+                    <p>Baris isi 9.</p>
+                    <p>Baris isi 10.</p>
+                </div>
+            </div>
+        </div>
+
+<pre><code>.judul-sticky {
+  position: sticky;
+  top: 0;       /* menempel saat mencapai tepi atas */
+}</code></pre>
+    </section>
+
+
+    <!-- ===== 7. Z-INDEX ===== -->
+    <section class="materi">
+        <h2>7. Z-index</h2>
+        <p>
+            Elemen yang bertumpuk bisa diatur <b>urutan tumpukannya</b> dengan <code>z-index</code>.
+            Angka lebih besar berada di atas. Hanya berlaku untuk elemen yang position-nya bukan static.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">tanpa z-index</span>
+                <div class="induk-z">
+                    <div class="z merah-z z-a"></div>
+                    <div class="z emas-z z-b"></div>
+                    <div class="z ungu-z z-c"></div>
+                </div>
+            </div>
+            <div class="demo">
+                <span class="label">merah z-index: 3</span>
+                <div class="induk-z">
+                    <div class="z merah-z z-a z-tinggi"></div>
+                    <div class="z emas-z z-b"></div>
+                    <div class="z ungu-z z-c"></div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            Tanpa z-index, elemen yang ditulis <b>belakangan di HTML</b> berada paling atas (ungu).
+            Dengan <code>z-index: 3</code>, kotak merah naik ke paling atas.
+        </p>
+    </section>
+
+
+    <!-- ===== 8. KESIMPULAN ===== -->
+    <section class="materi">
+        <h2>8. Kesalahan Umum dan Kesimpulan</h2>
+        <h3>Kesalahan umum</h3>
+        <ul>
+            <li>Memakai <code>top</code>/<code>left</code> pada elemen static, hasilnya tidak ada efek.</li>
+            <li>Lupa memberi <code>position: relative</code> pada parent, sehingga absolute mengacu ke halaman.</li>
+            <li>Memakai <code>sticky</code> tanpa <code>top</code>, jadi tidak pernah menempel.</li>
+            <li>Memakai <code>z-index</code> pada elemen static, hasilnya tidak ada efek.</li>
+        </ul>
+
+        <h3>Kesimpulan</h3>
+        <ul>
+            <li><code>static</code> adalah default dan mengabaikan top, right, bottom, left.</li>
+            <li><code>relative</code> bergeser dari posisi semula, ruang asalnya tetap.</li>
+            <li><code>absolute</code> mengacu ke parent terdekat yang berposisi, ruang asalnya hilang.</li>
+            <li><code>fixed</code> mengacu ke layar dan tidak ikut scroll.</li>
+            <li><code>sticky</code> menempel saat di-scroll melewati batas <code>top</code>.</li>
+            <li><code>z-index</code> mengatur urutan tumpukan elemen berposisi.</li>
+        </ul>
+    </section>
+
+</div>
+
+<!-- tombol fixed: selalu di pojok kanan bawah layar -->
+<a href="#atas" class="tombol-atas">Ke atas</a>
+
+</body>
+</html>

@@ -15,6 +15,8 @@
     Float (left, right), clear, parent menciut dan cara memperbaikinya, layout tiga kolom
 8. Latihan-8
      Clearfix (parent menciut, elemen kosong, overflow, ::after, flow-root)
+9. Latihan-9
+    Position (static, relative, absolute, fixed, sticky), top, right, bottom, left, z-index
 
 1. Project-1
     Dibuat untuk mempraktikkan materi CSS layouting yang sudah dipelajari.
