@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-index CSS Layouting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- navbar fixed: menempel di atas layar. Z-index-nya dibuat paling tinggi
+     supaya tidak tertutup kotak-kotak demo (z-index 999) saat di-scroll -->
+<div class="navbar-fixed">Navbar fixed (z-index: 1000)</div>
+
+<div class="wrapper">
+
+    <!-- ===== JUDUL HALAMAN ===== -->
+    <header class="judul">
+        <h1>Z-index</h1>
+        <p>Catatan belajar CSS layouting: mengatur urutan tumpukan elemen yang saling menimpa.</p>
+    </header>
+
+
+    <!-- ===== 1. APA ITU Z-INDEX ===== -->
+    <section class="materi">
+        <h2>1. Apa itu Z-index?</h2>
+        <p>
+            Halaman web punya tiga arah: kiri-kanan (sumbu X), atas-bawah (sumbu Y), dan
+            <b>depan-belakang (sumbu Z)</b>. <code>z-index</code> mengatur sumbu Z itu.
+            Bayangkan <b>tumpukan kertas</b>: kertas dengan angka lebih besar berada di atas.
+        </p>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Nilai</th><th>Artinya</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>auto</code></td><td>Default. Urutan mengikuti urutan penulisan di HTML</td></tr>
+                    <tr><td>Angka positif (<code>1</code>, <code>10</code>, <code>999</code>)</td><td>Makin besar, makin di atas</td></tr>
+                    <tr><td>Angka negatif (<code>-1</code>)</td><td>Dikirim ke belakang</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="catatan">
+            <b>Ingat:</b> <code>z-index</code> hanya berfungsi pada elemen yang
+            <code>position</code>-nya bukan <code>static</code> (relative, absolute, fixed, sticky).
+        </p>
+    </section>
+
+
+    <!-- ===== 2. URUTAN TUMPUKAN ===== -->
+    <section class="materi">
+        <h2>2. Urutan Tumpukan dan Latihan Tiga Kotak</h2>
+        <p>
+            Tanpa z-index, elemen berposisi yang <b>ditulis belakangan</b> di HTML berada paling atas.
+            Z-index mengubah urutan itu.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">tanpa z-index</span>
+                <div class="induk-3">
+                    <div class="b b1"></div>
+                    <div class="b b2"></div>
+                    <div class="b b3"></div>
+                </div>
+            </div>
+            <div class="demo">
+                <span class="label">kotak hitam z-index: 999</span>
+                <div class="induk-3">
+                    <div class="b b1"></div>
+                    <div class="b b2 tinggi"></div>
+                    <div class="b b3"></div>
+                </div>
+            </div>
+        </div>
+
+        <ul>
+            <li>Kiri: kotak salmon (paling akhir ditulis) menimpa hitam, dan hitam menimpa biru muda.</li>
+            <li>Kanan: kotak hitam diberi <code>z-index: 999</code>, jadi naik ke paling atas.</li>
+        </ul>
+    </section>
+
+
+    <!-- ===== 3. HANYA UNTUK ELEMEN BERPOSISI ===== -->
+    <section class="materi">
+        <h2>3. Hanya untuk Elemen Berposisi</h2>
+        <p>
+            Kotak kuning di bawah punya <code>z-index: 999</code>, tetapi kalau
+            position-nya <b>static</b> (default), angka itu diabaikan.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">kuning static, z-index: 999</span>
+                <div class="induk-s">
+                    <div class="s1"></div>
+                    <div class="s2"></div>
+                </div>
+            </div>
+            <div class="demo">
+                <span class="label">kuning relative, z-index: 999</span>
+                <div class="induk-s">
+                    <div class="s1"></div>
+                    <div class="s2 s2-rel"></div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            Kiri: kotak merah (relative) tetap di atas kuning, karena kuning static dan angkanya diabaikan.
+            Kanan: setelah kuning diberi <code>position: relative</code>, z-index 999 baru berfungsi.
+        </p>
+    </section>
+
+
+    <!-- ===== 4. Z-INDEX NEGATIF ===== -->
+    <section class="materi">
+        <h2>4. Z-index Negatif</h2>
+        <p>
+            Nilai negatif mengirim elemen <b>ke belakang</b>, sehingga teks tampil di depannya.
+            Berguna untuk hiasan di belakang teks.
+        </p>
+
+        <div class="kartu-neg">
+            <div class="hiasan"></div>
+            <p>Teks ini tampil di depan hiasan kuning.</p>
+        </div>
+
+<pre><code>.kartu  { position: relative; z-index: 0; }   /* jadi acuan tumpukan */
+.hiasan { position: absolute; z-index: -1; }  /* di belakang teks */</code></pre>
+
+        <p class="catatan">
+            <code>z-index: 0</code> pada parent penting. Tanpa itu, hiasan bernilai negatif bisa
+            lari ke belakang latar parent dan tidak terlihat.
+        </p>
+    </section>
+
+
+    <!-- ===== 5. STACKING CONTEXT ===== -->
+    <section class="materi">
+        <h2>5. Stacking Context: Kenapa z-index Besar Kadang Kalah?</h2>
+        <p>
+            Elemen berposisi yang punya z-index membuat <b>ruang tumpukan sendiri</b> (stacking context).
+            Z-index anak-anaknya hanya dihitung <b>di dalam ruang itu</b>. Antar ruang,
+            yang dibandingkan adalah z-index <b>parent-nya</b>.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">anak aqua z-index 999, anak salmon z-index 1</span>
+                <div class="induk-z">
+                    <div class="ctx ctx-a">
+                        A (z-index: 1)
+                        <div class="anak anak-a">999</div>
+                    </div>
+                    <div class="ctx ctx-b">
+                        B (z-index: 2)
+                        <div class="anak anak-b">1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            Kotak aqua punya z-index 999, tetapi tertutup oleh parent B. Alasannya:
+            parent A (z-index 1) berada di bawah parent B (z-index 2),
+            dan seluruh isi A ikut berada di bawah B, berapa pun angka anak-anaknya.
+        </p>
+
+        <h3>Pembuat stacking context</h3>
+        <ul>
+            <li>Elemen berposisi (relative, absolute) yang punya z-index selain <code>auto</code></li>
+            <li>Elemen <code>fixed</code> dan <code>sticky</code></li>
+            <li>Elemen dengan <code>opacity</code> kurang dari 1</li>
+            <li>Elemen dengan <code>transform</code></li>
+        </ul>
+    </section>
+
+
+    <!-- ===== 6. KASUS NYATA: HEADER TERTUTUP ===== -->
+    <section class="materi">
+        <h2>6. Kasus Nyata: Header Menempel Tertutup Konten</h2>
+        <p>
+            Header sticky di atas dan kartu-kartu berposisi <code>relative</code> di bawahnya.
+            Scroll di dalam kotak untuk melihat bedanya.
+        </p>
+
+        <div class="baris">
+            <div class="demo">
+                <span class="label">header tanpa z-index</span>
+                <div class="kotak-scroll">
+                    <div class="header-s">Header sticky</div>
+                    <div class="kartu-s">Kartu 1</div>
+                    <div class="kartu-s">Kartu 2</div>
+                    <div class="kartu-s">Kartu 3</div>
+                    <div class="kartu-s">Kartu 4</div>
+                    <div class="kartu-s">Kartu 5</div>
+                    <div class="kartu-s">Kartu 6</div>
+                </div>
+            </div>
+            <div class="demo">
+                <span class="label">header z-index: 10</span>
+                <div class="kotak-scroll">
+                    <div class="header-s header-z">Header sticky</div>
+                    <div class="kartu-s">Kartu 1</div>
+                    <div class="kartu-s">Kartu 2</div>
+                    <div class="kartu-s">Kartu 3</div>
+                    <div class="kartu-s">Kartu 4</div>
+                    <div class="kartu-s">Kartu 5</div>
+                    <div class="kartu-s">Kartu 6</div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            Kiri: kartu berposisi yang ditulis belakangan menimpa header saat di-scroll.
+            Kanan: header diberi z-index, jadi tetap di atas.
+        </p>
+
+        <p class="catatan">
+            Navbar fixed di bagian atas halaman ini memakai <code>z-index: 1000</code>,
+            lebih tinggi dari kotak demo yang bernilai 999. Kalau navbar tidak diberi z-index,
+            kotak berposisi yang melewatinya saat di-scroll bisa menutupi navbar.
+        </p>
+    </section>
+
+
+    <!-- ===== 7. KESALAHAN UMUM DAN KESIMPULAN ===== -->
+    <section class="materi">
+        <h2>7. Kesalahan Umum dan Kesimpulan</h2>
+
+        <h3>Kalau z-index tidak berfungsi, cek:</h3>
+        <ul>
+            <li>Apakah elemennya sudah punya <code>position</code> selain static?</li>
+            <li>Apakah elemennya terjebak di stacking context parent yang z-index-nya lebih rendah?</li>
+            <li>Apakah elemen lain punya z-index yang sama atau lebih tinggi?</li>
+        </ul>
+
+        <h3>Tips</h3>
+        <ul>
+            <li>Hindari angka asal-asalan seperti <code>99999</code>. Pakai skala yang teratur.</li>
+        </ul>
+
+        <div class="tabel-wrap">
+            <table>
+                <thead>
+                    <tr><th>Jenis elemen</th><th>Contoh z-index</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Konten biasa</td><td><code>auto</code> atau <code>1</code></td></tr>
+                    <tr><td>Dropdown</td><td><code>10</code> sampai <code>100</code></td></tr>
+                    <tr><td>Header atau navbar</td><td><code>100</code> sampai <code>1000</code></td></tr>
+                    <tr><td>Modal atau pop-up</td><td><code>1000</code> ke atas</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Kesimpulan</h3>
+        <ul>
+            <li><code>z-index</code> mengatur urutan depan-belakang. Angka besar berada di atas.</li>
+            <li>Hanya berfungsi pada elemen yang position-nya bukan static.</li>
+            <li>Tanpa z-index, elemen yang ditulis belakangan berada di atas.</li>
+            <li>Nilai negatif mengirim elemen ke belakang.</li>
+            <li>Z-index anak hanya dibandingkan di dalam stacking context parent-nya.</li>
+        </ul>
+    </section>
+
+</div>
+</body>
+</html>

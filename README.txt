@@ -17,6 +17,8 @@
      Clearfix (parent menciut, elemen kosong, overflow, ::after, flow-root)
 9. Latihan-9
     Position (static, relative, absolute, fixed, sticky), top, right, bottom, left, z-index
+10.Latihan-10
+     Z-index (urutan tumpukan, elemen berposisi, nilai negatif, stacking context)
 
 1. Project-1
     Dibuat untuk mempraktikkan materi CSS layouting yang sudah dipelajari.

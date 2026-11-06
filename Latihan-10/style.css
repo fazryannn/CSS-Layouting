@@ -1,0 +1,354 @@
+/* ==========================================================
+   Z-INDEX - CSS dasar
+   Bagian 1: pengaturan umum halaman
+   Bagian 2: komponen tampilan (judul, kartu materi, tabel, kode)
+   Bagian 3: contoh demo untuk tiap materi
+   ========================================================== */
+
+
+/* ---------- BAGIAN 1: PENGATURAN UMUM ---------- */
+
+/* border-box -> width sudah termasuk padding dan border */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8eef3;
+    color: #2b2f33;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 80px 15px 30px;    /* atas 80px: ruang untuk navbar fixed setinggi 50px */
+}
+
+/* max-width + margin auto -> konten di tengah, menyusut di layar kecil */
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #1e3a5f;
+}
+
+
+/* ---------- BAGIAN 2: KOMPONEN TAMPILAN ---------- */
+
+.judul {
+    background-color: #1e3a5f;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-bottom: 6px solid #0f766e;
+}
+
+.judul h1 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.judul p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* kartu putih untuk tiap materi */
+.materi {
+    background-color: #ffffff;
+    border-left: 6px solid #0f766e;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.materi h2 {
+    margin-top: 0;
+}
+
+.materi h3 {
+    color: #0f766e;
+}
+
+code {
+    background-color: #eef4f6;
+    color: #b45309;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.catatan {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+}
+
+/* tabel bisa digeser ke samping di layar kecil */
+.tabel-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+}
+
+/* nth-child: baris genap diberi warna selang-seling */
+tbody tr:nth-child(even) {
+    background-color: #eef4f6;
+}
+
+
+/* ---------- BAGIAN 3: CONTOH DEMO ---------- */
+
+.baris {
+    margin-bottom: 10px;
+}
+
+/* inline-block -> demo berjajar ke samping */
+.demo {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 14px 14px 0;
+}
+
+.label {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+    max-width: 260px;
+}
+
+
+/* --- Navbar fixed (dari latihan) ---
+   Mengacu ke layar dan menempel di atas.
+   z-index 1000 lebih tinggi dari demo lain (999), jadi tidak pernah tertutup.
+   Kalau z-index-nya dihapus, kotak berposisi yang lewat saat scroll bisa menimpanya. */
+.navbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    line-height: 50px;
+    background-color: #1d4ed8;
+    color: #ffffff;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+
+/* --- Demo 2: tiga kotak bertumpuk ---
+   Tiga kotak dari latihan (aslinya 100x100, diperkecil).
+   Aslinya ditulis  div { position: absolute; ... }  yang mengenai semua div.
+   Di sini dipakai class supaya div lain tidak ikut berubah. */
+.induk-3 {
+    position: relative;     /* acuan untuk kotak yang absolute */
+    width: 170px;
+    height: 150px;
+    background-color: #f1f5f9;
+    border: 2px solid #94a3b8;
+}
+
+.b {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+}
+
+.b1 { top: 0;    left: 0;    background-color: aqua; }
+.b2 { top: 30px; left: 30px; background-color: black; }
+.b3 { top: 60px; left: 60px; background-color: salmon; }
+
+/* tanpa z-index, yang ditulis belakangan (salmon) berada paling atas.
+   z-index 999 mengangkat kotak hitam ke atas semuanya. */
+.tinggi {
+    z-index: 999;
+}
+
+
+/* --- Demo 3: z-index pada elemen static --- */
+.induk-s {
+    width: 170px;
+    padding: 8px;
+    background-color: #f1f5f9;
+    border: 2px solid #94a3b8;
+}
+
+/* merah: relative dengan z-index 1 */
+.s1 {
+    position: relative;
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    background-color: red;
+}
+
+/* kuning: static, jadi z-index 999 DIABAIKAN.
+   margin-top negatif menariknya ke atas sehingga menimpa merah. */
+.s2 {
+    z-index: 999;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    margin-left: 40px;
+    background-color: gold;
+}
+
+/* setelah diberi position, z-index 999 mulai berfungsi */
+.s2-rel {
+    position: relative;
+}
+
+
+/* --- Demo 4: z-index negatif --- */
+
+/* z-index: 0 + position membuat ruang tumpukan sendiri,
+   jadi hiasan bernilai -1 tetap di atas latar kartu tetapi di belakang teks */
+.kartu-neg {
+    position: relative;
+    z-index: 0;
+    width: 280px;
+    padding: 30px 20px;
+    margin-bottom: 15px;
+    background-color: #f1f5f9;
+    border: 2px solid #94a3b8;
+}
+
+.kartu-neg p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.hiasan {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 150px;
+    height: 46px;
+    background-color: #fcd34d;
+    z-index: -1;            /* dikirim ke belakang teks */
+}
+
+
+/* --- Demo 5: stacking context --- */
+.induk-z {
+    position: relative;
+    width: 270px;
+    height: 200px;
+    background-color: #f8fafc;
+    border: 2px solid #94a3b8;
+}
+
+/* parent A dan B: masing-masing membuat ruang tumpukan sendiri.
+   Yang dibandingkan antar ruang adalah z-index parent: A (1) di bawah B (2). */
+.ctx {
+    position: absolute;
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+.ctx-a {
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    background-color: #cbd5e1;
+    z-index: 1;
+}
+
+.ctx-b {
+    top: 50px;
+    left: 100px;
+    width: 140px;
+    height: 120px;
+    background-color: #fde68a;
+    z-index: 2;
+}
+
+.anak {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* z-index 999 hanya dihitung DI DALAM ruang A, jadi tetap kalah dari B */
+.anak-a {
+    top: 70px;
+    left: 70px;
+    width: 90px;
+    height: 90px;
+    background-color: aqua;
+    z-index: 999;
+}
+
+.anak-b {
+    top: 10px;
+    left: 10px;
+    width: 70px;
+    height: 70px;
+    background-color: salmon;
+    z-index: 1;
+}
+
+
+/* --- Demo 6: header sticky tertutup konten --- */
+.kotak-scroll {
+    width: 230px;
+    height: 150px;
+    overflow-y: auto;
+    border: 2px solid #94a3b8;
+}
+
+.header-s {
+    position: sticky;
+    top: 0;
+    padding: 6px 10px;
+    background-color: #1e3a5f;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.header-z {
+    z-index: 10;
+}
+
+.kartu-s {
+    position: relative;
+    margin: 8px;
+    padding: 12px;
+    background-color: salmon;
+    color: #ffffff;
+    font-size: 14px;
+}
