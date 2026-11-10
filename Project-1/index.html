@@ -2,14 +2,31 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <!-- viewport: wajib untuk tampilan responsif di smartphone -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAZ-GARAGE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- ===== NAVBAR FIXED: menempel di atas layar =====
+         .top-bar-isi dibatasi 960px agar sejajar dengan container di bawahnya.
+         Kolom pencarian berada di kanan. Menu lain bisa ditambah di kiri. -->
+    <div class="top-bar">
+        <div class="top-bar-isi">
+            <!-- Kolom pencarian (belum terhubung ke halaman hasil) -->
+            <form class="cari" action="#" method="get" role="search">
+                <input type="search" name="q" placeholder="Cari artikel..." aria-label="Cari artikel">
+                <button type="submit">Cari</button>
+            </form>
+        </div>
+    </div>
+
     <!-- ===== PEMBUNGKUS HALAMAN (lebar maksimal 960px, di tengah) ===== -->
     <div class="container">
+
+        <!-- ===== LOGO GITHUB: pojok kanan atas, menuju profil GitHub ===== -->
+        <a href="https://github.com/fazryannn" class="github" target="_blank" rel="noopener" aria-label="GitHub fazryannn"></a>
 
         <!-- ===== HEADER: nama website dan menu ===== -->
         <header class="header">
@@ -30,7 +47,8 @@
 
         <!-- ===== ISI HALAMAN: dua kolom (artikel + sidebar) =====
              Kedua kolom di-float, jadi pembungkus ini diberi class clearfix
-             agar tingginya mengikuti kolom dan footer tidak naik. -->
+             agar tingginya mengikuti kolom dan footer tidak naik.
+             Di layar kecil, kedua kolom otomatis tersusun ke bawah (lihat CSS bagian responsif). -->
         <div class="content clearfix">
 
             <!-- Kolom kiri: artikel -->

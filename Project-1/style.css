@@ -1,9 +1,11 @@
 /* ==========================================================
-   FAZ-GARAGE - Halaman Artikel dengan Sidebar
-   1. Pengaturan umum   5. Hero (foto sampul)
-   2. Reset ringan      6. Isi halaman (artikel + sidebar)
-   3. Container         7. Clearfix
-   4. Header dan menu   8. Footer
+   FAZ-GARAGE - Halaman Artikel (Responsif)
+   1. Pengaturan umum     7. Hero (foto sampul)
+   2. Reset ringan        8. Isi halaman (artikel + sidebar)
+   3. Navbar fixed        9. Clearfix
+   4. Container          10. Footer
+   5. Logo GitHub        11. Responsif (tablet dan smartphone)
+   6. Header dan menu
    ========================================================== */
 
 
@@ -21,6 +23,10 @@ body {
     color: #111827;             /* teks: hampir hitam */
     background-color: #f4f5f7;  /* cadangan kalau gambar background belum termuat */
     background-image: url(img/background.png);
+    margin: 0;                  /* hapus margin bawaan browser (8px) agar container
+                                   menempel ke navbar dan tepi layar */
+    padding-top: 40px;          /* ruang untuk navbar fixed (tingginya 40px),
+                                   agar bagian atas halaman tidak tertutup */
 }
 
 /* Versi shorthand font (hasilnya sama):
@@ -39,17 +45,90 @@ ul, li {
 }
 
 
-/* ---------- 3. CONTAINER ----------
+/* ---------- 3. NAVBAR FIXED ----------
+   position: fixed -> mengacu ke layar, tetap di atas saat halaman di-scroll.
+   top, left, right = 0 -> membentang penuh dari kiri ke kanan.
+   z-index -> berada di atas konten lain. Isi menu menyusul. */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-color: salmon;
+    z-index: 100;
+}
+
+/* isi navbar: lebar maksimal 960px dan di tengah, sama seperti .container,
+   supaya kolom pencarian sejajar dengan tepi kanan halaman */
+.top-bar-isi {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 5px 20px;          /* atas-bawah 5px: kolom 30px berada di tengah bar 40px */
+}
+
+/* kolom pencarian: float right -> menempel di sisi kanan */
+.cari {
+    float: right;
+}
+
+.cari input {
+    width: 200px;
+    height: 30px;
+    padding: 0 10px;
+    border: none;
+    font-size: 0.875rem;        /* 14px */
+    vertical-align: top;        /* sejajar dengan tombol */
+}
+
+.cari button {
+    height: 30px;
+    padding: 0 14px;
+    border: none;
+    background-color: #1f2937;
+    color: #ffffff;
+    font-size: 0.875rem;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.cari button:hover {
+    background-color: #111827;
+}
+
+
+/* ---------- 4. CONTAINER ----------
    max-width (bukan width) -> di layar kecil menyusut, tidak melebar keluar.
-   margin auto -> berada di tengah halaman. */
+   margin auto -> berada di tengah halaman.
+   position: relative -> jadi acuan untuk logo GitHub yang absolute. */
 .container {
     max-width: 960px;
     margin: auto;
     background-color: #ffffff;
+    position: relative;
+    padding-top: 20px;
+    overflow: hidden;           /* bagian logo yang keluar dari container dipotong,
+                                   jadi halaman tidak bisa digeser ke samping */
 }
 
 
-/* ---------- 4. HEADER DAN MENU ---------- */
+/* ---------- 5. LOGO GITHUB ----------
+   position: absolute -> dihitung dari sudut .container (parent relative).
+   Ukuran dan posisinya disesuaikan lagi di bagian responsif. */
+.github {
+    position: absolute;
+    top: 0;                     /* menempel ke tepi atas container (abaikan padding-top) */
+    right: -52px;               /* gambar punya sisi transparan 52px di kanan,
+                                   digeser keluar agar pita menempel ke tepi kanan */
+    width: 200px;
+    height: 200px;
+    background-image: url(img/github.png);
+    background-repeat: no-repeat;
+    z-index: 10;                /* di atas header dan hero, di bawah navbar */
+}
+
+
+/* ---------- 6. HEADER DAN MENU ---------- */
 
 .header {
     padding: 20px 20px 10px;    /* atas | kiri-kanan | bawah */
@@ -74,7 +153,7 @@ ul, li {
 }
 
 
-/* ---------- 5. HERO (FOTO SAMPUL) ---------- */
+/* ---------- 7. HERO (FOTO SAMPUL) ---------- */
 
 .hero {
     height: 380px;
@@ -86,16 +165,18 @@ ul, li {
 }
 
 
-/* ---------- 6. ISI HALAMAN (ARTIKEL + SIDEBAR) ----------
-   Dua kolom dibuat dengan float:
-   artikel (600px) di kiri + sidebar (300px) di kanan = 900px.
-   Sisa 60px dari container 960px menjadi jarak di antara keduanya.
-   Pembungkus .content diberi class clearfix (lihat bagian 7). */
+/* ---------- 8. ISI HALAMAN (ARTIKEL + SIDEBAR) ----------
+   Dua kolom dibuat dengan float. Lebarnya memakai persen supaya ikut
+   menyusut saat container mengecil:
+   600px / 960px = 62.5%  (artikel)
+   300px / 960px = 31.25% (sidebar)
+   Sisanya 6.25% (60px di layar lebar) menjadi jarak di antara keduanya.
+   Pembungkus .content diberi class clearfix (lihat bagian 9). */
 
 /* --- Kolom artikel --- */
 .main {
     float: left;
-    width: 600px;
+    width: 62.5%;
     padding: 20px;
 }
 
@@ -122,7 +203,7 @@ ul.item {
 /* --- Kolom sidebar --- */
 .sidebar {
     float: right;
-    width: 300px;
+    width: 31.25%;
     padding: 20px;
 }
 
@@ -142,7 +223,7 @@ ul.item {
 }
 
 
-/* ---------- 7. CLEARFIX ----------
+/* ---------- 9. CLEARFIX ----------
    Parent yang semua isinya di-float akan menciut jadi tinggi nol.
    ::after membuat elemen bayangan di akhir parent yang menolak
    berdampingan dengan float (clear: both), sehingga parent ikut memanjang
@@ -155,7 +236,7 @@ ul.item {
 }
 
 
-/* ---------- 8. FOOTER ---------- */
+/* ---------- 10. FOOTER ---------- */
 
 .footer {
     background-color: #1f2937;      /* abu kebiruan gelap */
@@ -165,4 +246,74 @@ ul.item {
     color: #eaeaea;
     text-align: center;
     font-size: 0.875rem;            /* 14px */
+    margin: 0;
+}
+
+
+/* ==========================================================
+   11. RESPONSIF
+   @media = aturan yang hanya berlaku saat kondisi layar terpenuhi.
+   max-width: 768px artinya "untuk layar selebar 768px atau lebih kecil".
+   Aturan di dalamnya menimpa aturan di atas, jadi harus ditulis PALING BAWAH.
+   ========================================================== */
+
+/* --- Smartphone (768px ke bawah) --- */
+@media (max-width: 768px) {
+
+    /* navbar: kolom pencarian dipersempit agar muat di layar kecil */
+    .top-bar-isi {
+        padding: 5px 10px;
+    }
+
+    .cari input {
+        width: 150px;
+    }
+
+    /* logo GitHub dikecilkan agar tidak menutupi konten.
+       Sisi transparan ikut mengecil: 52px x (90 / 200) = sekitar 23px,
+       jadi right diganti -23px agar pita tetap menempel ke tepi. */
+    .github {
+        width: 90px;
+        height: 90px;
+        right: -23px;
+        background-size: contain;   /* gambar menyesuaikan ukuran kotak */
+    }
+
+    /* header: ruang di kanan agar judul dan menu tidak tertimpa logo */
+    .header {
+        padding: 15px 100px 10px 15px;
+    }
+
+    /* hero lebih pendek, bagian tengah gambar yang ditampilkan */
+    .hero {
+        height: 200px;
+        background-position: center;
+    }
+
+    /* dua kolom tersusun ke bawah: float dimatikan, lebar penuh */
+    .main,
+    .sidebar {
+        float: none;
+        width: 100%;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+    /* sidebar diberi garis pemisah dari artikel */
+    .sidebar {
+        padding: 15px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    /* teks sidebar lebih besar agar terbaca di layar kecil */
+    .sidebar p {
+        font-size: 0.875rem;        /* 14px */
+    }
+
+    /* daftar tidak perlu menjorok terlalu jauh */
+    ul.item {
+        padding-left: 35px;
+    }
 }
